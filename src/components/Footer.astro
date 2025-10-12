@@ -4,7 +4,40 @@ import { siteConfig } from '@/site-config'
 const today = new Date()
 ---
 
-<footer class='flex justify-center items-center w-full px-16 h-28 border-t-2'>
-	&copy; {today.getFullYear()}
-	{siteConfig.author}. All rights reserved.
+<footer class='flex flex-col justify-center items-start w-full px-16 py-8 border-t-2'>
+	<div class='flex flex-col md:flex-row gap-8 w-full'>
+		<!-- Contact Information Section -->
+		<div class='flex-1'>
+			<h3 class='font-semibold text-lg mb-2'>MIT Assistive Technology Club</h3>
+			<p class='text-sm mb-1'>
+				Contact: <a
+					href='mailto:assistivetech@mit.edu'
+					class='text-indigo-600 dark:text-indigo-400 hover:underline'>assistivetech@mit.edu</a>
+			</p>
+			<p class='text-sm'>77 Massachusetts Ave</p>
+			<p class='text-sm'>Cambridge MA 02139</p>
+			<p class='text-sm'>United States</p>
+		</div>
+
+		<!-- Accessibility Statement Section -->
+		<div class='flex-1'>
+			<p class='text-xs text-gray-600 dark:text-gray-400'>
+				MIT is committed to providing an environment that is accessible to individuals with
+				disabilities. If you cannot access content or use features on our website due to a
+				disability, please <a
+					href='https://accessibility.mit.edu/'
+					target='_blank'
+					class='text-indigo-600 dark:text-indigo-400 hover:underline'>let us know</a
+				>.
+			</p>
+		</div>
+
+		<!-- Copyright Section -->
+		<div class='flex-1'>
+			<p class='text-sm text-gray-600 dark:text-gray-400'>
+				&copy; {today.getFullYear()}
+				{siteConfig.author}. All rights reserved.
+			</p>
+		</div>
+	</div>
 </footer>
