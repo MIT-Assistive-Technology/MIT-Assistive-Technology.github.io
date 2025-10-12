@@ -50,4 +50,3 @@ export const filterPostsByCategory = async (category: string) => {
 		.filter((post) => !post.data.draft)
 		.filter((post) => post.data.category.toLowerCase() === category)
 }
-
