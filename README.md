@@ -168,7 +168,7 @@ title: MacBook Pro 2022
 description: 'The new MacBook Pro 2022 is here. With the Apple M2 chip, a new design, and more, the new MacBook Pro is the best laptop Apple has ever made.'
 pubDate: 'Jul 02 2022'
 heroImage: '../../assets/bg.jpg'
-category: 'Category 1'
+category: 'Home'
 tags: ['JavaScript', 'css', 'HTML5', 'GitHub']
 draft: true <---
 ```

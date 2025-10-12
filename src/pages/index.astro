@@ -12,7 +12,34 @@ const posts = await getPosts(MAX_POSTS)
 
 <BaseLayout title='Home'>
 	<TitlePage title={siteConfig.title} />
+
 	<ListCategories />
+
+	<!-- Intro Section -->
+	<section class='my-8 p-6 rounded-lg bg-gray-100 dark:bg-gray-900 flex flex-col items-center'>
+		<div class='w-full max-w-4xl overflow-hidden mb-5 rounded-lg'>
+			<img
+				src='/MITAssistiveTechnologyClubPhotoSpring2024.jpg'
+				alt='MIT Assistive Technology Club Spring 2024'
+				class='w-full h-80 object-cover rounded-lg'
+				style='clip-path: inset(10% 0 5% 0 round 1rem); object-position: center -50px;'
+			/>
+		</div>
+		<h2 class='text-4xl font-bold mb-2 text-center'>Welcome to MIT Assistive Technology Club</h2>
+		<p class='text-xl italic font-semibold text-center mb-2'>
+			Designing today for a more inclusive tomorrow.
+		</p>
+		<br />
+		<p class='text-lg px-8 mb-10 text-center'>
+			Our mission is to make the world more accessible to everyone by building connections within
+			our community and fostering collaborative efforts to create inclusive technology.
+		</p>
+		<a
+			href='/category/about/1'
+			class='text-white font-semibold bg-indigo-700 px-4 py-2 mb-10 rounded transition hover:bg-indigo-900'
+			>Learn more about us</a
+		>
+	</section>
 
 	<div>
 		<h2 class='text-lg font-medium tracking-wide text-end'>Latest Posts</h2>
