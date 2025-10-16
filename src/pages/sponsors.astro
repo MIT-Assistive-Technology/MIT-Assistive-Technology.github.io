@@ -1,0 +1,120 @@
+---
+// src/pages/sponsors.astro
+import BaseLayout from '@/layouts/BaseLayout'
+import ListCategories from '@/components/ListCategories'
+import TitlePage from '@/components/TitlePage'
+---
+
+<BaseLayout title='Our Sponsors'>
+	<TitlePage title='Our Sponsors' />
+	<ListCategories activeCategory='Sponsors' />
+
+	<section class='max-w-4xl mx-auto py-12 px-6'>
+		<h1 class='text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white'>Our Sponsors</h1>
+		<p class='mb-12 text-center text-gray-700 dark:text-gray-300 text-lg'>
+			We can't do what we do without our sponsors!
+		</p>
+
+		<!-- Sponsors Grid -->
+		<div class='grid grid-cols-1 md:grid-cols-3 gap-8 mb-12'>
+			<!-- MIT EECS -->
+			<div
+				class='bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-shadow duration-300'
+			>
+				<a
+					href='https://www.eecs.mit.edu/'
+					target='_blank'
+					rel='noopener noreferrer'
+					class='block group'
+				>
+					<div class='mb-4'>
+						<img
+							src='/sponsors/eecs.png'
+							alt='MIT EECS Logo'
+							class='mx-auto h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-300'
+						/>
+					</div>
+					<h3
+						class='text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors'
+					>
+						MIT EECS
+					</h3>
+					<p class='text-gray-600 dark:text-gray-400 text-sm'>
+						MIT Department of Electrical Engineering & Computer Science
+					</p>
+				</a>
+			</div>
+
+			<!-- MIT MechE -->
+			<div
+				class='bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-shadow duration-300'
+			>
+				<a
+					href='https://meche.mit.edu/'
+					target='_blank'
+					rel='noopener noreferrer'
+					class='block group'
+				>
+					<div class='mb-4'>
+						<img
+							src='/sponsors/meche.png'
+							alt='MIT MechE Logo'
+							class='mx-auto h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-300'
+						/>
+					</div>
+					<h3
+						class='text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors'
+					>
+						MIT MechE
+					</h3>
+					<p class='text-gray-600 dark:text-gray-400 text-sm'>
+						MIT Department of Mechanical Engineering
+					</p>
+				</a>
+			</div>
+
+			<!-- MIT Edgerton Center -->
+			<div
+				class='bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-shadow duration-300'
+			>
+				<a
+					href='https://edgerton.mit.edu/'
+					target='_blank'
+					rel='noopener noreferrer'
+					class='block group'
+				>
+					<div class='mb-4'>
+						<img
+							src='/sponsors/edgertoncenter.png'
+							alt='MIT Edgerton Center Logo'
+							class='mx-auto h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-300'
+						/>
+					</div>
+					<h3
+						class='text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors'
+					>
+						MIT Edgerton Center
+					</h3>
+					<p class='text-gray-600 dark:text-gray-400 text-sm'>Hands-on Learning & Innovation</p>
+				</a>
+			</div>
+		</div>
+
+		<!-- Call to Action -->
+		<div class='bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-8 text-center'>
+			<h2 class='text-2xl font-bold text-gray-900 dark:text-white mb-4'>
+				Interested in Sponsoring?
+			</h2>
+			<p class='text-gray-700 dark:text-gray-300 mb-6'>
+				If you're interested in sponsoring or collaborating with us, please email
+				<a
+					href='mailto:assistivetech@mit.edu'
+					class='text-indigo-600 dark:text-indigo-400 hover:underline font-semibold'
+				>
+					assistivetech@mit.edu
+				</a>
+				for more information or for our sponsorship package.
+			</p>
+		</div>
+	</section>
+</BaseLayout>
