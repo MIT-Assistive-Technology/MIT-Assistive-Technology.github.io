@@ -1,0 +1,95 @@
+---
+// src/pages/team.astro
+import BaseLayout from '@/layouts/BaseLayout'
+import TitlePage from '@/components/TitlePage'
+import ListCategories from '@/components/ListCategories'
+import yaml from 'js-yaml'
+import fs from 'fs'
+import path from 'path'
+
+// Read team data from YAML file
+const teamDataPath = path.join(process.cwd(), 'src/data/team.yaml')
+const teamData = yaml.load(fs.readFileSync(teamDataPath, 'utf8')) as {
+	teams: Array<{
+		name: string
+		members: Array<{ name: string; photo: string; role: string; position?: string }>
+	}>
+}
+---
+
+<BaseLayout title='Our Team'>
+	<TitlePage title='Our Team' />
+	<ListCategories activeCategory='Team' />
+
+	<section class='max-w-6xl mx-auto py-12 px-6'>
+		<div class='text-center mb-12'>
+			<h1 class='text-4xl font-bold mb-4 text-gray-900 dark:text-white'>Meet Our Team</h1>
+			<p class='text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto'>
+				Meet both current and previous members of the MIT Assistive Technology Club.
+			</p>
+		</div>
+
+		{
+			teamData.teams.map((team) => (
+				<div class='mb-16'>
+					<h2 class='text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white border-b-2 border-indigo-500 pb-2 inline-block'>
+						{team.name}
+					</h2>
+
+					<div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
+						{team.members.map((member) => (
+							<div class='bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group'>
+								<div class='aspect-square relative overflow-hidden'>
+									<img
+										src={`/team-photos/${member.photo}`}
+										alt={`${member.name} - ${member.role}`}
+										class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+										loading='lazy'
+										onerror="this.src='/MITATLogo.png'"
+									/>
+									<div class='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300' />
+								</div>
+								<div class='p-6 text-center'>
+									<h3 class='text-xl font-semibold text-gray-900 dark:text-white mb-2'>
+										{member.name}
+									</h3>
+									<p class='text-indigo-600 dark:text-indigo-400 font-medium mb-1'>{member.role}</p>
+									{member.position && (
+										<p class='text-sm text-gray-600 dark:text-gray-400'>{member.position}</p>
+									)}
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			))
+		}
+
+		<!-- Call to Action -->
+		<div
+			class='bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-lg p-8 text-center mt-16'
+		>
+			<h2 class='text-2xl font-bold text-gray-900 dark:text-white mb-4'>Want to Join Our Team?</h2>
+			<p class='text-gray-700 dark:text-gray-300 mb-6 max-w-2xl mx-auto'>
+				We're always looking for passionate students who want to make a difference in assistive
+				technology. Join us in creating innovative solutions that improve lives.
+			</p>
+			<div class='flex flex-col sm:flex-row gap-4 justify-center'>
+				<a
+					href='/contact'
+					class='bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300'
+				>
+					Get in Touch
+				</a>
+				<a
+					href='https://github.com/MIT-Assistive-Technology'
+					target='_blank'
+					rel='noopener noreferrer'
+					class='bg-gray-800 hover:bg-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300'
+				>
+					View Our Projects
+				</a>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
