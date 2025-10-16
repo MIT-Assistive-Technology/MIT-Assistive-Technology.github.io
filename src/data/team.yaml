@@ -26,58 +26,290 @@ teams:
         role: 'Project Manager'
         position: 'Class of 2027'
 
-  # - name: "Technical Team"
-  #   members:
-  #     - name: "Charlie Wilson"
-  #       photo: "charlie-wilson.jpg"
-  #       role: "Lead Developer"
-  #       position: "Class of 2025"
-  #     - name: "Diana Lee"
-  #       photo: "diana-lee.jpg"
-  #       role: "Hardware Engineer"
-  #       position: "Class of 2026"
-  #     - name: "Eve Davis"
-  #       photo: "eve-davis.jpg"
-  #       role: "Software Engineer"
-  #       position: "Class of 2027"
+  - name: 'Codesigners, Fall 2025'
+    members:
+      - name: 'Benjamin Lou'
+        photo: 'benjamin-lou.jpg'
+        position: 'Founder / Robotic Feeding Device'
+      - name: 'Kahmile Whitby'
+        photo: 'kahmile-whitby.jpg'
+        position: 'Low Vision Tactile 3D Models'
+      - name: 'Erik Kondo'
+        photo: 'erik-kondo.jpg'
+        position: 'Wheelchair Innovations'
+      - name: 'Scott'
+        photo: 'scott.jpg'
+        position: 'Blind Assistance'
+      - name: 'Eric'
+        photo: 'Eric.jpg'
+        position: 'Blind Assistance'
+      - name: 'Susan'
+        photo: 'susan.jpg'
+        position: 'Cane Stabilizer'
+      - name: 'Maksym'
+        photo: 'maksym.jpg'
+        position: 'Adapted Gaming Setup'
+      - name: 'Rishi'
+        photo: 'rishi.jpg'
+        position: 'Rollator Adaptations'
 
-  # - name: "Design Team"
-  #   members:
-  #     - name: "Frank Miller"
-  #       photo: "frank-miller.jpg"
-  #       role: "UX Designer"
-  #       position: "Class of 2025"
-  #     - name: "Grace Taylor"
-  #       photo: "grace-taylor.jpg"
-  #       role: "Product Designer"
-  #       position: "Class of 2026"
-  #     - name: "Henry Anderson"
-  #       photo: "henry-anderson.jpg"
-  #       role: "Graphic Designer"
-  #       position: "Class of 2027"
+  - name: 'Adapted Gaming Setup'
+    members:
+      - name: 'Rachel Yeung'
+        photo: 'rachel-yeung.jpg'
+        position: 'Class of 2029'
+      - name: 'Tiffany Tausch'
+        photo: 'tiffany-tausch.jpg'
+        position: 'Class of 2028'
+      - name: 'Natalie Kozlowski'
+        photo: 'natalie-kozlowski.jpg'
+        position: 'Class of 2028'
+      - name: 'Angela Yang'
+        photo: 'angela-yang.jpg'
+        position: 'Class of 2029'
+      - name: 'Anna Gluschuk'
+        photo: 'anna-gluschuk.jpg'
+        position: 'Class of 2029'
+      - name: 'Rojina Adhikari'
+        photo: 'rojina-adhikari.jpg'
+        position: 'Class of 2029'
+      - name: 'Aurora Huang'
+        photo: 'aurora-huang.jpg'
+        position: 'Class of 2029'
+      - name: 'Anthony Schu'
+        photo: 'anthony-schu.jpg'
+        position: 'Class of 2029'
+      - name: 'Joel Santiago-Baretti'
+        photo: 'joel-santiago-baretti.jpg'
+        position: 'Class of 2026'
+      - name: 'Lama Alahdal'
+        photo: 'lama-alahdal.jpg'
+        position: 'Class of 2027'
+      - name: 'Riya Sahu'
+        photo: 'riya-sahu.jpg'
+        position: 'Class of 2029'
+      - name: 'Fiona Lu'
+        photo: 'fiona-lu.jpg'
+        position: 'Class of 2027'
+      - name: 'Annette Vega'
+        photo: 'annette-vega.jpg'
+        position: 'Class of 2028'
+      - name: 'Beatrice Jiang'
+        photo: 'beatrice-jiang.jpg'
+        position: 'Class of 2029'
+      - name: 'Matthew Medina'
+        photo: 'matthew-medina.jpg'
+        position: 'Class of 2029'
+      - name: 'Erik Xie'
+        photo: 'erik-xie.jpg'
+        position: 'Class of 2027'
+      - name: 'Wade Rogers'
+        photo: 'wade-rogers.jpg'
+        position: 'Class of 2029'
+      - name: 'Mellanie Rodriguez'
+        photo: 'mellanie-rodriguez.jpg'
+        position: 'Class of 2029'
 
-  # - name: "Outreach Team"
-  #   members:
-  #     - name: "Ivy Chen"
-  #       photo: "ivy-chen.jpg"
-  #       role: "Community Manager"
-  #       position: "Class of 2025"
-  #     - name: "Jack White"
-  #       photo: "jack-white.jpg"
-  #       role: "Event Coordinator"
-  #       position: "Class of 2026"
-  #     - name: "Kate Green"
-  #       photo: "kate-green.jpg"
-  #       role: "Marketing Lead"
-  #       position: "Class of 2027"
+  - name: 'Wheelchair Innovations'
+    members:
+      - name: 'Mayuri Fiete'
+        photo: 'mayuri-fiete.jpg'
+        position: 'Class of 2029'
+      - name: 'Isha Madey'
+        photo: 'isha-madey.jpg'
+        position: 'Class of 2029'
+      - name: 'Kelsey Dwyer'
+        photo: 'kelsey-dwyer.jpg'
+        position: 'Class of 2028'
+      - name: 'Sam Havener'
+        photo: 'sam-havener.jpg'
+        position: 'Class of 2028'
+      - name: 'Alexandria Prisecaru'
+        photo: 'alexandria-prisecaru.jpg'
+        position: 'Class of 2029'
+      - name: 'Christy Ly'
+        photo: 'christy-ly.jpg'
+        position: 'Class of 2027'
+      - name: 'Paige Dzenutis'
+        photo: 'paige-dzenutis.jpg'
+        position: 'Class of 2027'
+      - name: 'Jana Diriyeh'
+        photo: 'jana-diriyeh.jpg'
+        position: 'Class of 2029'
+      - name: 'Uma Kirk'
+        photo: 'uma-kirk.jpg'
+        position: 'Class of 2029'
+      - name: 'Shannon Cordle'
+        photo: 'shannon-cordle.jpg'
+        position: 'Class of 2028'
+      - name: 'Semai Ralph'
+        photo: 'semai-ralph.jpg'
+        position: 'Class of 2029'
+      - name: 'Juna Gregersen'
+        photo: 'juna-gregersen.jpg'
+        position: 'Class of 2029'
+      - name: 'Vincent Zheng'
+        photo: 'vincent-zheng.jpg'
+        position: 'Class of 2029'
 
-  # - name: "Previous Members"
-  #   members:
-  #     - name: ""
-  #       photo: "alison-soong.jpg"
-  #       role: "President"
-  #       position: "Class of 2027"
-  #     - name: "Natalie Dean"
-  #       photo: "natalie-dean.jpg"
-  #       role: "Vice President"
-  #       position: "Class of 2026"
+  - name: 'Cane Stabilizer'
+    members:
+      - name: 'Daniel Nwazue'
+        photo: 'daniel-nwazue.jpg'
+        position: 'Class of 2027'
+      - name: 'Alex Zhindon-Romero'
+        photo: 'alex-zhindon-romero.jpg'
+        position: 'Class of 2027'
+      - name: 'Amie Kitjasateanphun'
+        photo: 'amie-kitjasateanphun.jpg'
+        position: 'Class of 2027'
+      - name: 'Minh Ho'
+        photo: 'minh-ho.jpg'
+        position: 'Class of 2029'
+      - name: 'Lanie Dela Pena'
+        photo: 'lanie-dela-pena.jpg'
+        position: 'Class of 2027'
+      - name: 'Vy Pham'
+        photo: 'vy-pham.jpg'
+        position: 'Class of 2027'
+      - name: 'Hager Gomaa'
+        photo: 'hager-gomaa.jpg'
+        position: 'Class of 2027'
+      - name: 'Lilian Gan'
+        photo: 'lilian-gan.jpg'
+        position: 'Class of 2029'
+      - name: 'Ephraim Fischer'
+        photo: 'ephraim-fischer.jpg'
+        position: 'Class of 2029'
+
+  - name: 'Rollator Adaptations'
+    members:
+      - name: 'Kelsey Morey'
+        photo: 'kelsey-morey.jpg'
+        position: 'Class of 2028'
+      - name: 'Ash Guzman'
+        photo: 'ash-guzman.jpg'
+        position: 'Class of 2029'
+      - name: 'Kathleen Yick'
+        photo: 'kathleen-yick.jpg'
+        position: 'Class of 2029'
+
+  - name: 'Spatial Audio Blind Assistance'
+    members:
+      - name: 'Minh Tran'
+        photo: 'minh-tran.jpg'
+        position: 'Class of 2029'
+      - name: 'Carys Chan'
+        photo: 'carys-chan.jpg'
+        position: 'Class of 2029'
+      - name: 'Anna Chan'
+        photo: 'anna-chan.jpg'
+        position: 'Class of 2029'
+      - name: 'Kyra Cui'
+        photo: 'kyra-cui.jpg'
+        position: 'Class of 2029'
+      - name: 'Sophie Cheung'
+        photo: 'sophie-cheung.jpg'
+        position: 'Class of 2029'
+      - name: 'Sophia Yang'
+        photo: 'sophia-yang.jpg'
+        position: 'Class of 2029'
+      - name: 'Adrian Johnson'
+        photo: 'adrian-johnson.jpg'
+        position: 'Class of 2029'
+
+  - name: 'UberFinder'
+    members:
+      - name: 'Liane Xu'
+        photo: 'liane-xu.jpg'
+        position: 'Class of 2025'
+      - name: 'Tage Mehta'
+        photo: 'tage-mehta.jpg'
+        position: 'Class of 2028'
+      - name: 'Hayden Tedrake'
+        photo: 'hayden-tedrake.jpg'
+        position: 'Class of 2028'
+      - name: 'Erik Xie'
+        photo: 'erik-xie.jpg'
+        position: 'Class of 2027'
+      - name: 'Beckett Roberge'
+        photo: 'beckett-roberge.jpg'
+        position: 'Class of 2028'
+      - name: 'Rushil Shah'
+        photo: 'rushil-shah.jpg'
+        position: 'Class of 2027'
+      - name: 'Megha Hegde'
+        photo: 'megha-hegde.jpg'
+        position: 'Class of 2027'
+      - name: 'Alex He'
+        photo: 'alex-he.jpg'
+        position: 'Class of 2027'
+
+  - name: 'Low Vision Tactile 3D Models'
+    members:
+      - name: 'Hafsa Amin'
+        photo: 'hafsa-amin.jpg'
+        position: 'Class of 2028'
+      - name: 'Lucy Sun'
+        photo: 'lucy-sun.jpg'
+        position: 'Class of 2029'
+      - name: 'Catherine Zhao'
+        photo: 'catherine-zhao.jpg'
+        position: 'Class of 2029'
+      - name: 'Fatemeh Fardin'
+        photo: 'fatemeh-fardin.jpg'
+        position: 'Class of 2029'
+      - name: 'Carlos Nunez-Sosa'
+        photo: 'carlos-nunez-sosa.jpg'
+        position: 'Class of 2028'
+
+  - name: 'Robotic Feeding Device'
+    members:
+      - name: 'Jia Li'
+        photo: 'jia-li.jpg'
+        position: 'Class of 2029'
+      - name: 'Felice Li'
+        photo: 'felice-li.jpg'
+        position: 'Class of 2029'
+      - name: 'Molly Dulde'
+        photo: 'molly-dulde.jpg'
+        position: 'Class of 2026'
+      - name: 'Iman Babiker'
+        photo: 'iman-babiker.jpg'
+        position: 'Class of 2029'
+      - name: 'Kaiyan Ling'
+        photo: 'kaiyan-ling.jpg'
+        position: 'Class of 2029'
+      - name: 'Hala Komaiha'
+        photo: 'hala-komaiha.jpg'
+        position: 'Class of 2029'
+      - name: 'Kangxi Yang'
+        photo: 'kangxi-yang.jpg'
+        position: 'Class of 2029'
+      - name: 'Calista Huang'
+        photo: 'calista-huang.jpg'
+        position: 'Class of 2028'
+      - name: 'Jonas Sun'
+        photo: 'jonas-sun.jpg'
+        position: 'Class of 2029'
+      - name: 'Sarah Hourani'
+        photo: 'sarah-hourani.jpg'
+        position: 'Class of 2029'
+      - name: 'Mia Rozenberg'
+        photo: 'mia-rozenberg.jpg'
+        position: 'Class of 2029'
+      - name: 'Nicholas Rodriguez'
+        photo: 'nicholas-rodriguez.jpg'
+        position: 'Class of 2029'
+      - name: 'Kaku Benti'
+        photo: 'kaku-benti.jpg'
+        position: 'Class of 2029'
+      - name: 'Anjali Gorti'
+        photo: 'anjali-gorti.jpg'
+        position: 'Class of 2028'
+      - name: 'Maeve Hong'
+        photo: 'maeve-hong.jpg'
+        position: 'Class of 2029'
+      - name: 'Elise Echarte'
+        photo: 'elise-echarte.jpg'
+        position: 'Class of 2029'
