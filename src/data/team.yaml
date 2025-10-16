@@ -1,30 +1,30 @@
 teams:
-  - name: "Executive Board"
+  - name: 'Executive Board'
     members:
-      - name: "Alison Soong"
-        photo: "alison-soong.jpg"
-        role: "President"
-        position: "Class of 2027"
-      - name: "Natalie Dean"
-        photo: "natalie-dean.jpg"
-        role: "Vice President"
-        position: "Class of 2026"
-      - name: "Minki (Andy) Shim"
-        photo: "minki-shim.jpg"
-        role: "Treasurer"
-        position: "Class of 2026"
-      - name: "Michelle Wang"
-        photo: "michelle-wang.jpg"
-        role: "External Relations"
-        position: "Class of 2027"
-      - name: "Lien Nguyen"
-        photo: "lien-nguyen.jpg"
-        role: "Project Manager"
-        position: "Class of 2027"
-      - name: "Lama Diriyeh"
-        photo: "lama-diriyeh.jpg"
-        role: "Project Manager"
-        position: "Class of 2027"
+      - name: 'Alison Soong'
+        photo: 'alison-soong.jpg'
+        role: 'President'
+        position: 'Class of 2027'
+      - name: 'Natalie Dean'
+        photo: 'natalie-dean.jpg'
+        role: 'Vice President'
+        position: 'Class of 2026'
+      - name: 'Minki (Andy) Shim'
+        photo: 'minki-shim.jpg'
+        role: 'Treasurer'
+        position: 'Class of 2026'
+      - name: 'Michelle Wang'
+        photo: 'michelle-wang.jpg'
+        role: 'External Relations'
+        position: 'Class of 2027'
+      - name: 'Lien Nguyen'
+        photo: 'lien-nguyen.jpg'
+        role: 'Project Manager'
+        position: 'Class of 2027'
+      - name: 'Lama Diriyeh'
+        photo: 'lama-diriyeh.jpg'
+        role: 'Project Manager'
+        position: 'Class of 2027'
 
   # - name: "Technical Team"
   #   members:
@@ -81,4 +81,3 @@ teams:
   #       photo: "natalie-dean.jpg"
   #       role: "Vice President"
   #       position: "Class of 2026"
- 
