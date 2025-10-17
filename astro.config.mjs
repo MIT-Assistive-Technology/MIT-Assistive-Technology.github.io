@@ -30,5 +30,10 @@ export default defineConfig({
 		}),
 		sitemap(),
 		tailwind()
-	]
+	],
+	mdx: {
+		components: {
+			Image: './src/components/mdx/Image.astro'
+		}
+	}
 })
