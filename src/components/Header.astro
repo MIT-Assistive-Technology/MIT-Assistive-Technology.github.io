@@ -7,53 +7,71 @@ import ToggleTheme from './ToggleTheme.astro'
 import { SOCIALNETWORKS } from '@/data/links'
 ---
 
-<header class='relative flex items-center h-12 font-semibold'>
-	<a class='text-lg mr-auto' href='/'>Home</a>
+<header class='relative flex items-center justify-between h-12 font-semibold'>
+	<a class='text-lg z-10 relative' href='/'>Home</a>
 
+	<!-- Hamburger button for mobile - positioned outside the drawer -->
+	<button
+		id='astro-header-drawer-button'
+		type='button'
+		class='md:hidden z-[9999] relative p-3 -m-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors pointer-events-auto touch-manipulation'
+		style='position: relative !important; z-index: 9999 !important; pointer-events: auto !important;'
+		aria-expanded='false'
+		aria-controls='astro-header-drawer'
+	>
+		<MenuIcon />
+		<span class='sr-only'>Show Menu</span>
+	</button>
+
+	<!-- Desktop navigation items -->
+	<div class='hidden md:flex items-center gap-3'>
+		<HeaderLink href='/tags' class='flex items-center gap-1 text-base'>
+			<TagIcon /> Tags
+		</HeaderLink>
+		<div class='flex items-center gap-3 pl-3 border-r-2 border-black pr-4 dark:border-white'>
+			<Search />
+			<ToggleTheme />
+		</div>
+		<div class='flex justify-center items-center gap-3'>
+			{
+				SOCIALNETWORKS.map((network) => (
+					<HeaderLink
+						class='flex-shrink-0'
+						href={network.url}
+						target='_blank'
+						aria-label={network.name}
+					>
+						<span>{<network.icon />} </span>
+					</HeaderLink>
+				))
+			}
+		</div>
+	</div>
+
+	<!-- Mobile drawer menu -->
 	<div
 		id='astro-header-drawer'
-		class='shadow rounded-l-lg md:bg-transparent dark:md:bg-transparent bg-white dark:bg-[#0a0910] md:shadow-none md:rounded-none md:border-none md:h-auto md:static absolute transition-transform duration-300 ease-in translate-x-96 md:translate-x-0 top-12 -right-5 pl-4 pt-6 pb-8 md:p-0 h-[360px] md:h-auto w-[280px] z-50'
+		class='shadow rounded-l-lg bg-white dark:bg-[#0a0910] absolute transition-transform duration-300 ease-in translate-x-96 top-12 -right-5 pt-6 pb-8 h-[360px] w-[300px] z-40 md:hidden pointer-events-auto'
 	>
-		<nav
-			class='flex h-full flex-col justify-between gap-6 text-left md:flex-row md:w-full md:gap-3 md:items-center'
-		>
-			<div
-				class='flex flex-col gap-4 md:flex-row md:border-r-2 border-black pr-4 dark:border-white'
-			>
-				<HeaderLink href='/' class='flex items-center gap-1 text-lg md:text-base md:hidden'>
-					Home
-				</HeaderLink>
-				<HeaderLink
-					href='/category/about/1'
-					class='flex items-center gap-1 text-lg md:text-base md:hidden'
-				>
+		<nav class='flex h-full flex-col text-left'>
+			<div class='flex flex-col gap-4 pl-9'>
+				<HeaderLink href='/' class='flex items-center gap-1 text-lg'>Home</HeaderLink>
+				<HeaderLink href='/category/about/1' class='flex items-center gap-1 text-lg'>
 					About
 				</HeaderLink>
-				<HeaderLink href='/team' class='flex items-center gap-1 text-lg md:text-base md:hidden'>
-					Team
-				</HeaderLink>
-				<HeaderLink href='/sponsors' class='flex items-center gap-1 text-lg md:text-base md:hidden'>
-					Sponsors
-				</HeaderLink>
-				<HeaderLink href='/contact' class='flex items-center gap-1 text-lg md:text-base md:hidden'>
-					Contact
-				</HeaderLink>
-				<HeaderLink href='/tags' class='flex items-center gap-1 text-lg md:text-base'>
+				<HeaderLink href='/team' class='flex items-center gap-1 text-lg'>Team</HeaderLink>
+				<HeaderLink href='/sponsors' class='flex items-center gap-1 text-lg'>Sponsors</HeaderLink>
+				<HeaderLink href='/contact' class='flex items-center gap-1 text-lg'>Contact</HeaderLink>
+				<HeaderLink href='/tags' class='flex items-center gap-1 text-lg'>
 					<TagIcon /> Tags
 				</HeaderLink>
-				<div class='flex items-center gap-3 md:pl-3' transition:persist='navbar'>
-					<div>
-						<Search />
-					</div>
-					<ToggleTheme />
-					<button id='astro-header-drawer-button' type='button' class='md:ml-6 md:hidden'>
-						<MenuIcon />
-						<span class='sr-only'>Show Menu</span>
-					</button>
-				</div>
+				<div class='flex items-start gap-0'></div>
 			</div>
 
-			<div class='flex justify-center items-center gap-4 md:gap-3 md:p-0 flex-wrap pb-6'>
+			<!-- Icons section - absolutely positioned at bottom left -->
+			<div class='absolute bottom-8 left-14 flex items-center gap-4'>
+				<Search />
+				<ToggleTheme />
 				{
 					SOCIALNETWORKS.map((network) => (
 						<HeaderLink
@@ -71,17 +89,123 @@ import { SOCIALNETWORKS } from '@/data/links'
 	</div>
 </header>
 <script>
-	document.addEventListener('click', (event) => {
-		const menu = document.getElementById('astro-header-drawer')
-		const menuButton = document.getElementById('astro-header-drawer-button')
-		const isClickInside =
-			menu?.contains(event.target as HTMLDivElement) ||
-			menuButton?.contains(event.target as HTMLButtonElement)
+	// BULLETPROOF mobile menu - simple and reliable
+	let isMenuOpen = false
 
-		if (isClickInside) {
-			menu?.classList.toggle('translate-x-96')
-		} else {
-			menu?.classList.add('translate-x-96')
+	const setupMobileMenu = () => {
+		const menu = document.getElementById('astro-header-drawer')
+		const menuButton = document.getElementById(
+			'astro-header-drawer-button'
+		) as HTMLButtonElement | null
+
+		if (!menu || !menuButton) return
+
+		// Clear any existing event listeners by cloning the button
+		const newButton = menuButton.cloneNode(true) as HTMLButtonElement
+		menuButton.parentNode?.replaceChild(newButton, menuButton)
+
+		// Simple toggle function
+		const toggleMenu = () => {
+			console.log('Toggle called, current state:', isMenuOpen)
+			isMenuOpen = !isMenuOpen
+
+			if (isMenuOpen) {
+				// Show menu - remove the translate class
+				menu.classList.remove('translate-x-96')
+				newButton.setAttribute('aria-expanded', 'true')
+				console.log('Menu OPENED')
+			} else {
+				// Hide menu - add the translate class
+				menu.classList.add('translate-x-96')
+				newButton.setAttribute('aria-expanded', 'false')
+				console.log('Menu CLOSED')
+			}
 		}
-	})
+
+		// Close menu function
+		const closeMenu = () => {
+			if (isMenuOpen) {
+				isMenuOpen = false
+				menu.classList.add('translate-x-96')
+				newButton.setAttribute('aria-expanded', 'false')
+				console.log('Menu closed externally')
+			}
+		}
+
+		// Add click event listener
+		newButton.addEventListener('click', (e) => {
+			e.preventDefault()
+			e.stopPropagation()
+			toggleMenu()
+		})
+
+		// Add touch event listener
+		newButton.addEventListener('touchstart', (e) => {
+			e.preventDefault()
+			e.stopPropagation()
+			toggleMenu()
+		})
+
+		// Close menu when clicking outside
+		document.addEventListener('click', (e) => {
+			const target = e.target as HTMLElement
+			if (!menu.contains(target) && !newButton.contains(target)) {
+				closeMenu()
+			}
+		})
+
+		// Close menu on escape key
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') {
+				closeMenu()
+			}
+		})
+
+		// Initialize
+		isMenuOpen = false
+		menu.classList.add('translate-x-96')
+		newButton.setAttribute('aria-expanded', 'false')
+
+		console.log('Mobile menu setup complete')
+	}
+
+	// Setup on multiple events to ensure it works
+	setupMobileMenu()
+	document.addEventListener('DOMContentLoaded', setupMobileMenu)
+	document.addEventListener('astro:after-swap', setupMobileMenu)
 </script>
+
+<style>
+	/* Emergency fixes for mobile menu button */
+	#astro-header-drawer-button {
+		position: relative !important;
+		z-index: 9999 !important;
+		pointer-events: auto !important;
+		min-width: 44px !important;
+		min-height: 44px !important;
+		background: transparent !important;
+		border: none !important;
+		outline: none !important;
+	}
+
+	#astro-header-drawer-button:hover,
+	#astro-header-drawer-button:focus,
+	#astro-header-drawer-button:active {
+		pointer-events: auto !important;
+		z-index: 9999 !important;
+	}
+
+	/* Ensure no other elements can block the button */
+	header > *:not(#astro-header-drawer-button) {
+		pointer-events: auto;
+	}
+
+	/* Mobile-specific fixes */
+	@media (max-width: 768px) {
+		#astro-header-drawer-button {
+			z-index: 99999 !important;
+			position: relative !important;
+			pointer-events: auto !important;
+		}
+	}
+</style>

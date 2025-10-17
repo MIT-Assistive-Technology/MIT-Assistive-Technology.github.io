@@ -20,9 +20,19 @@ import MoonIcon from '@/components/icons/MoonIcon'
 						})
 						// dispatch event -> ThemeProvider.astro
 						document.dispatchEvent(themeChangeEvent)
+						// Update button state immediately
 						button.setAttribute('aria-pressed', String(!isPressed))
 					}
 				})
+			}
+		}
+
+		connectedCallback() {
+			// Ensure button state is correct when component is connected
+			const button = this.querySelector('button') as HTMLButtonElement
+			if (button) {
+				const bodyThemeIsDark = document.documentElement.classList.contains('dark')
+				button.setAttribute('aria-pressed', String(bodyThemeIsDark))
 			}
 		}
 	}
@@ -47,9 +57,38 @@ import MoonIcon from '@/components/icons/MoonIcon'
 <script is:inline>
 	const button = document.getElementById('toggle-theme')
 
-	function setButtonPresssed() {
-		const bodyThemeIsDark = document.documentElement.classList.contains('dark')
-		button.setAttribute('aria-pressed', String(bodyThemeIsDark))
+	function setButtonPressed() {
+		if (button) {
+			const bodyThemeIsDark = document.documentElement.classList.contains('dark')
+			button.setAttribute('aria-pressed', String(bodyThemeIsDark))
+		}
 	}
-	setButtonPresssed()
+
+	// Set initial state
+	setButtonPressed()
+
+	// Update button state when theme changes
+	document.addEventListener('theme-change', setButtonPressed)
+
+	// Update button state after page transitions
+	document.addEventListener('astro:after-swap', setButtonPressed)
+
+	// Update button state when DOM is ready
+	document.addEventListener('DOMContentLoaded', setButtonPressed)
+
+	// Watch for class changes on the document element
+	if (window.MutationObserver) {
+		const observer = new MutationObserver((mutations) => {
+			mutations.forEach((mutation) => {
+				if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+					setButtonPressed()
+				}
+			})
+		})
+
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ['class']
+		})
+	}
 </script>
