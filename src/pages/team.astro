@@ -12,7 +12,13 @@ const teamDataPath = path.join(process.cwd(), 'src/data/team.yaml')
 const teamData = yaml.load(fs.readFileSync(teamDataPath, 'utf8')) as {
 	teams: Array<{
 		name: string
-		members: Array<{ name: string; photo: string; role: string; position?: string }>
+		members: Array<{
+			name: string
+			photo: string
+			role: string
+			position?: string
+			show_picture?: boolean
+		}>
 	}>
 }
 ---
@@ -41,16 +47,18 @@ const teamData = yaml.load(fs.readFileSync(teamDataPath, 'utf8')) as {
 					<div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
 						{team.members.map((member) => (
 							<div class='bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group'>
-								<div class='aspect-square relative overflow-hidden'>
-									<img
-										src={`/team-photos/${member.photo}`}
-										alt={`${member.name} - ${member.role}`}
-										class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
-										loading='lazy'
-										onerror="this.src='/MITATLogo.png'"
-									/>
-									<div class='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300' />
-								</div>
+								{member.show_picture !== false && (
+									<div class='aspect-square relative overflow-hidden'>
+										<img
+											src={`/team-photos/${member.photo}`}
+											alt={`${member.name} - ${member.role}`}
+											class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+											loading='lazy'
+											onerror="this.src='/MITATLogo.png'"
+										/>
+										<div class='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300' />
+									</div>
+								)}
 								<div class='p-6 text-center'>
 									<h3 class='text-xl font-semibold text-gray-900 dark:text-white mb-2'>
 										{member.name}

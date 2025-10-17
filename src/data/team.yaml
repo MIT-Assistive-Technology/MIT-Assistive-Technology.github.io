@@ -5,311 +5,436 @@ teams:
         photo: 'alison-soong.jpg'
         role: 'President'
         position: 'Class of 2027'
+        show_picture: true
       - name: 'Natalie Dean'
         photo: 'natalie-dean.jpg'
         role: 'Vice President'
         position: 'Class of 2026'
-      - name: 'Minki (Andy) Shim'
-        photo: 'minki-shim.jpg'
+        show_picture: true
+      - name: 'Andy Shim'
+        photo: 'andy-shim.jpg'
         role: 'Treasurer'
         position: 'Class of 2026'
+        show_picture: true
       - name: 'Michelle Wang'
         photo: 'michelle-wang.jpg'
         role: 'External Relations'
         position: 'Class of 2027'
+        show_picture: true
       - name: 'Lien Nguyen'
         photo: 'lien-nguyen.jpg'
         role: 'Project Manager'
         position: 'Class of 2027'
+        show_picture: true
       - name: 'Lama Diriyeh'
         photo: 'lama-diriyeh.jpg'
         role: 'Project Manager'
         position: 'Class of 2027'
+        show_picture: true
 
   - name: 'Codesigners, Fall 2025'
     members:
       - name: 'Benjamin Lou'
         photo: 'benjamin-lou.jpg'
         position: 'Founder / Robotic Feeding Device'
+        show_picture: false
       - name: 'Kahmile Whitby'
         photo: 'kahmile-whitby.jpg'
         position: 'Low Vision Tactile 3D Models'
+        show_picture: false
       - name: 'Erik Kondo'
         photo: 'erik-kondo.jpg'
         position: 'Wheelchair Innovations'
+        show_picture: false
       - name: 'Scott'
         photo: 'scott.jpg'
         position: 'Blind Assistance'
+        show_picture: false
       - name: 'Eric'
         photo: 'Eric.jpg'
         position: 'Blind Assistance'
+        show_picture: false
       - name: 'Susan'
         photo: 'susan.jpg'
         position: 'Cane Stabilizer'
+        show_picture: false
       - name: 'Maksym'
         photo: 'maksym.jpg'
         position: 'Adapted Gaming Setup'
+        show_picture: false
       - name: 'Rishi'
         photo: 'rishi.jpg'
         position: 'Rollator Adaptations'
+        show_picture: false
 
   - name: 'Adapted Gaming Setup'
     members:
+      - name: 'Joel Santiago-Baretti'
+        photo: 'joel-santiago-baretti.jpg'
+        role: 'Team Lead'
+        position: 'Class of 2026'
+        show_picture: false
+      - name: 'Erik Xie'
+        photo: 'erik-xie.jpg'
+        role: 'Team Lead'
+        position: 'Class of 2027'
+        show_picture: false
       - name: 'Rachel Yeung'
         photo: 'rachel-yeung.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Tiffany Tausch'
         photo: 'tiffany-tausch.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Natalie Kozlowski'
         photo: 'natalie-kozlowski.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Angela Yang'
         photo: 'angela-yang.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Anna Gluschuk'
         photo: 'anna-gluschuk.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Rojina Adhikari'
         photo: 'rojina-adhikari.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Aurora Huang'
         photo: 'aurora-huang.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Anthony Schu'
         photo: 'anthony-schu.jpg'
         position: 'Class of 2029'
-      - name: 'Joel Santiago-Baretti'
-        photo: 'joel-santiago-baretti.jpg'
-        position: 'Class of 2026'
+        show_picture: false
       - name: 'Lama Alahdal'
         photo: 'lama-alahdal.jpg'
         position: 'Class of 2027'
+        show_picture: false
       - name: 'Riya Sahu'
         photo: 'riya-sahu.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Fiona Lu'
         photo: 'fiona-lu.jpg'
         position: 'Class of 2027'
+        show_picture: false
       - name: 'Annette Vega'
         photo: 'annette-vega.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Beatrice Jiang'
         photo: 'beatrice-jiang.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Matthew Medina'
         photo: 'matthew-medina.jpg'
         position: 'Class of 2029'
-      - name: 'Erik Xie'
-        photo: 'erik-xie.jpg'
-        position: 'Class of 2027'
+        show_picture: false
       - name: 'Wade Rogers'
         photo: 'wade-rogers.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Mellanie Rodriguez'
         photo: 'mellanie-rodriguez.jpg'
         position: 'Class of 2029'
+        show_picture: false
 
   - name: 'Wheelchair Innovations'
     members:
+      - name: 'Paige Dzenutis'
+        photo: 'paige-dzenutis.jpg'
+        role: 'Team Lead'
+        position: 'Class of 2027'
+        show_picture: false
       - name: 'Mayuri Fiete'
         photo: 'mayuri-fiete.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Isha Madey'
         photo: 'isha-madey.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Kelsey Dwyer'
         photo: 'kelsey-dwyer.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Sam Havener'
         photo: 'sam-havener.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Alexandria Prisecaru'
         photo: 'alexandria-prisecaru.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Christy Ly'
         photo: 'christy-ly.jpg'
         position: 'Class of 2027'
-      - name: 'Paige Dzenutis'
-        photo: 'paige-dzenutis.jpg'
-        position: 'Class of 2027'
+        show_picture: false
       - name: 'Jana Diriyeh'
         photo: 'jana-diriyeh.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Uma Kirk'
         photo: 'uma-kirk.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Shannon Cordle'
         photo: 'shannon-cordle.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Semai Ralph'
         photo: 'semai-ralph.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Juna Gregersen'
         photo: 'juna-gregersen.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Vincent Zheng'
         photo: 'vincent-zheng.jpg'
         position: 'Class of 2029'
+        show_picture: false
 
   - name: 'Cane Stabilizer'
     members:
+      - name: 'Lanie Dela Pena'
+        photo: 'lanie-dela-pena.jpg'
+        role: 'Team Lead'
+        position: 'Class of 2027'
+        show_picture: false
+      - name: 'Hager Gomaa'
+        photo: 'hager-gomaa.jpg'
+        role: 'Team Lead'
+        position: 'Class of 2027'
+        show_picture: false
       - name: 'Daniel Nwazue'
         photo: 'daniel-nwazue.jpg'
         position: 'Class of 2027'
+        show_picture: false
       - name: 'Alex Zhindon-Romero'
         photo: 'alex-zhindon-romero.jpg'
         position: 'Class of 2027'
+        show_picture: false
       - name: 'Amie Kitjasateanphun'
         photo: 'amie-kitjasateanphun.jpg'
         position: 'Class of 2027'
+        show_picture: false
       - name: 'Minh Ho'
         photo: 'minh-ho.jpg'
         position: 'Class of 2029'
-      - name: 'Lanie Dela Pena'
-        photo: 'lanie-dela-pena.jpg'
-        position: 'Class of 2027'
+        show_picture: false
       - name: 'Vy Pham'
         photo: 'vy-pham.jpg'
         position: 'Class of 2027'
-      - name: 'Hager Gomaa'
-        photo: 'hager-gomaa.jpg'
-        position: 'Class of 2027'
+        show_picture: false
       - name: 'Lilian Gan'
         photo: 'lilian-gan.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Ephraim Fischer'
         photo: 'ephraim-fischer.jpg'
         position: 'Class of 2029'
+        show_picture: false
 
   - name: 'Rollator Adaptations'
     members:
+      - name: 'Kathleen Yick'
+        photo: 'kathleen-yick.jpg'
+        role: 'Team Lead'
+        position: 'Class of 2029'
+        show_picture: false
       - name: 'Kelsey Morey'
         photo: 'kelsey-morey.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Ash Guzman'
         photo: 'ash-guzman.jpg'
         position: 'Class of 2029'
-      - name: 'Kathleen Yick'
-        photo: 'kathleen-yick.jpg'
-        position: 'Class of 2029'
+        show_picture: false
 
   - name: 'Spatial Audio Blind Assistance'
     members:
+      - name: 'Sophie Cheung'
+        photo: 'sophie-cheung.jpg'
+        role: 'Team Lead'
+        position: 'Class of 2029'
+        show_picture: false
+      - name: 'Alison Soong'
+        photo: 'alison-soong.jpg'
+        position: 'Class of 2027'
+        show_picture: false
+      - name: 'Tage Mehta'
+        photo: 'tage-mehta.jpg'
+        position: 'Class of 2028'
+        show_picture: false
+      - name: 'Liane Xu'
+        photo: 'liane-xu.jpg'
+        position: 'Class of 2025'
+        show_picture: false
       - name: 'Minh Tran'
         photo: 'minh-tran.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Carys Chan'
         photo: 'carys-chan.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Anna Chan'
         photo: 'anna-chan.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Kyra Cui'
         photo: 'kyra-cui.jpg'
         position: 'Class of 2029'
-      - name: 'Sophie Cheung'
-        photo: 'sophie-cheung.jpg'
-        position: 'Class of 2029'
+        show_picture: false
       - name: 'Sophia Yang'
         photo: 'sophia-yang.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Adrian Johnson'
         photo: 'adrian-johnson.jpg'
         position: 'Class of 2029'
+        show_picture: false
 
   - name: 'UberFinder'
     members:
       - name: 'Liane Xu'
         photo: 'liane-xu.jpg'
+        role: 'Team Lead'
         position: 'Class of 2025'
+        show_picture: false
       - name: 'Tage Mehta'
         photo: 'tage-mehta.jpg'
+        role: 'Team Lead'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Hayden Tedrake'
         photo: 'hayden-tedrake.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Erik Xie'
         photo: 'erik-xie.jpg'
         position: 'Class of 2027'
+        show_picture: false
       - name: 'Beckett Roberge'
         photo: 'beckett-roberge.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Rushil Shah'
         photo: 'rushil-shah.jpg'
         position: 'Class of 2027'
+        show_picture: false
       - name: 'Megha Hegde'
         photo: 'megha-hegde.jpg'
         position: 'Class of 2027'
+        show_picture: false
       - name: 'Alex He'
         photo: 'alex-he.jpg'
         position: 'Class of 2027'
+        show_picture: false
 
   - name: 'Low Vision Tactile 3D Models'
     members:
+      - name: 'Megna Pillarisetti'
+        photo: 'megna-pillarisetti.jpg'
+        role: 'Team Lead'
+        position: 'Class of 2029'
+        show_picture: false
+      - name: 'Kahmile Whitby'
+        photo: 'kahmile-whitby.jpg'
+        role: 'Codesigner'
+        position: 'Class of 2026'
+        show_picture: false
       - name: 'Hafsa Amin'
         photo: 'hafsa-amin.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Lucy Sun'
         photo: 'lucy-sun.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Catherine Zhao'
         photo: 'catherine-zhao.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Fatemeh Fardin'
         photo: 'fatemeh-fardin.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Carlos Nunez-Sosa'
         photo: 'carlos-nunez-sosa.jpg'
         position: 'Class of 2028'
+        show_picture: false
 
   - name: 'Robotic Feeding Device'
     members:
+      - name: 'Molly Dulde'
+        photo: 'molly-dulde.jpg'
+        role: 'Team Lead'
+        position: 'Class of 2026'
+        show_picture: false
       - name: 'Jia Li'
         photo: 'jia-li.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Felice Li'
         photo: 'felice-li.jpg'
         position: 'Class of 2029'
-      - name: 'Molly Dulde'
-        photo: 'molly-dulde.jpg'
-        position: 'Class of 2026'
+        show_picture: false
       - name: 'Iman Babiker'
         photo: 'iman-babiker.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Kaiyan Ling'
         photo: 'kaiyan-ling.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Hala Komaiha'
         photo: 'hala-komaiha.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Kangxi Yang'
         photo: 'kangxi-yang.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Calista Huang'
         photo: 'calista-huang.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Jonas Sun'
         photo: 'jonas-sun.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Sarah Hourani'
         photo: 'sarah-hourani.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Mia Rozenberg'
         photo: 'mia-rozenberg.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Nicholas Rodriguez'
         photo: 'nicholas-rodriguez.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Kaku Benti'
         photo: 'kaku-benti.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Anjali Gorti'
         photo: 'anjali-gorti.jpg'
         position: 'Class of 2028'
+        show_picture: false
       - name: 'Maeve Hong'
         photo: 'maeve-hong.jpg'
         position: 'Class of 2029'
+        show_picture: false
       - name: 'Elise Echarte'
         photo: 'elise-echarte.jpg'
         position: 'Class of 2029'
+        show_picture: false
