@@ -108,27 +108,58 @@ import SearchIcon from '@/components/icons/SearchIcon'
 
 				try {
 					console.log('Initializing PagefindUI...')
+					console.log('Environment info:', {
+						BASE_URL: import.meta.env.BASE_URL,
+						MODE: import.meta.env.MODE,
+						DEV: import.meta.env.DEV,
+						PROD: import.meta.env.PROD,
+						location: window.location.href
+					})
+
 					// @ts-ignore
 					const { PagefindUI } = await import('@pagefind/default-ui')
 					console.log('PagefindUI imported successfully')
 
+					// Get the correct base URL for both development and production
+					// For production, we want to use the current origin to avoid CORS issues
+					let baseUrl = import.meta.env.BASE_URL || '/'
+
+					// If we're in production and BASE_URL is not set properly, use the current origin
+					if (import.meta.env.PROD && (baseUrl === '/' || !baseUrl)) {
+						baseUrl = window.location.origin + '/'
+					}
+
+					const bundlePath = baseUrl.replace(/\/$/, '') + '/pagefind/'
+
+					console.log('Pagefind configuration:', { baseUrl, bundlePath })
+
 					const pagefindInstance = new PagefindUI({
 						element: '#pagefind__search',
-						baseUrl: import.meta.env.BASE_URL,
-						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
+						baseUrl: baseUrl,
+						bundlePath: bundlePath,
 						showImages: false
 					})
 					console.log('PagefindUI initialized:', pagefindInstance)
 				} catch (error) {
 					console.error('Failed to load PagefindUI:', error)
+					// Fallback: show a message to the user
+					const searchElement = document.getElementById('pagefind__search')
+					if (searchElement) {
+						searchElement.innerHTML =
+							'<p class="text-gray-500">Search is temporarily unavailable. Please try again later.</p>'
+					}
 				}
 			}
 
-			// Try to initialize immediately
+			// Try to initialize immediately with a small delay to ensure DOM is ready
+			const initializeWithDelay = () => {
+				setTimeout(initPagefind, 100)
+			}
+
 			if (document.readyState === 'loading') {
-				document.addEventListener('DOMContentLoaded', initPagefind)
+				document.addEventListener('DOMContentLoaded', initializeWithDelay)
 			} else {
-				initPagefind()
+				initializeWithDelay()
 			}
 
 			// Add mobile search functionality - SIMPLE AND RELIABLE

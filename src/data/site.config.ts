@@ -10,7 +10,7 @@ interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-	site: 'http://assistivetech.mit.edu/', // Write here your website url
+	site: 'https://assistivetech.mit.edu/', // Write here your website url
 	author: 'MIT Assistive Technology Club', // Site author
 	title: 'MIT Assistive Technology Club', // Site title.
 	description:
