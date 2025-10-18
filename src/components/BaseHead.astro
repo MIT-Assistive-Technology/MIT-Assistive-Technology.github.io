@@ -49,6 +49,19 @@ import { AstroFont } from 'astro-font'
 <meta name='title' content={siteTitle} />
 <meta name='description' content={description} />
 <meta name='author' content={siteConfig.author} />
+<meta
+	name='keywords'
+	content='assistive technology, MIT, accessibility, inclusive design, disability, accessibility technology, co-design, engineering'
+/>
+<meta
+	name='robots'
+	content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+/>
+<meta name='googlebot' content='index, follow' />
+<meta name='bingbot' content='index, follow' />
+<meta name='theme-color' content='#4338ca' />
+<meta name='msapplication-TileColor' content='#4338ca' />
+<meta name='msapplication-config' content='/browserconfig.xml' />
 
 <!-- Open Graph / Facebook -->
 <meta property='og:type' content={articleDate ? 'article' : 'website'} />
@@ -82,6 +95,46 @@ import { AstroFont } from 'astro-font'
 
 <!-- RSS auto-discovery -->
 <link rel='alternate' type='application/rss+xml' title={siteConfig.title} href='/rss.xml' />
+
+<!-- Structured Data -->
+<script type='application/ld+json'>
+	{
+		"@context": "https://schema.org",
+		"@type": "${articleDate ? 'Article' : 'Organization'}",
+		"headline": "${title}",
+		"description": "${description}",
+		"author": {
+			"@type": "Organization",
+			"name": "${siteConfig.author}",
+			"url": "${siteConfig.site}"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "${siteConfig.title}",
+			"url": "${siteConfig.site}",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "${new URL('/MITATLogo.png', Astro.site).href}"
+			}
+		},
+		"datePublished": "${articleDate}",
+		"image": "${socialImageURL}",
+		"name": "${siteConfig.title}",
+		"description": "${siteConfig.description}",
+		"url": "${siteConfig.site}",
+		"logo": "${new URL('/MITATLogo.png', Astro.site).href}",
+		"sameAs": [
+			"https://www.instagram.com/mitassistivetech/",
+			"https://www.linkedin.com/company/mit-assistive-technology-club/"
+		],
+		"address": {
+			"@type": "PostalAddress",
+			"addressLocality": "Cambridge",
+			"addressRegion": "MA",
+			"addressCountry": "US"
+		}
+	}
+</script>
 
 <AstroFont
 	config={[

@@ -20,19 +20,24 @@ const posts = await getPosts(MAX_POSTS)
 		<div class='w-full max-w-4xl overflow-hidden mb-5 rounded-lg'>
 			<img
 				src='/MITAssistiveTechnologyClubPhotoSpring2024.jpg'
-				alt='MIT Assistive Technology Club Spring 2024'
+				alt='MIT Assistive Technology Club members at Spring 2024 showcase event, demonstrating inclusive design and accessibility technology projects'
 				class='w-full h-80 object-cover rounded-lg'
 				style='object-position: top ;'
+				loading='eager'
+				width='800'
+				height='320'
 			/>
 		</div>
-		<h2 class='text-4xl font-bold mb-2 text-center'>Welcome to MIT Assistive Technology Club</h2>
+		<h1 class='text-4xl font-bold mb-2 text-center'>Welcome to MIT Assistive Technology Club</h1>
 		<p class='text-xl italic font-semibold text-center mb-2'>
 			Designing today for a more inclusive tomorrow.
 		</p>
 		<br />
 		<p class='text-lg px-8 mb-10 text-center'>
 			Our mission is to make the world more accessible to everyone by building connections within
-			our community and fostering collaborative efforts to create inclusive technology.
+			our community and fostering collaborative efforts to create inclusive technology. We believe
+			in <strong>co-design</strong> - working directly with people with disabilities to create meaningful
+			assistive technology solutions.
 		</p>
 		<a
 			href='/category/about/1'
@@ -41,10 +46,10 @@ const posts = await getPosts(MAX_POSTS)
 		>
 	</section>
 
-	<div>
-		<h2 class='text-lg font-medium tracking-wide text-end'>Latest Posts</h2>
+	<section>
+		<h2 class='text-2xl font-bold mb-6 text-center'>Latest News & Updates</h2>
 		<ListPosts FirstBig={true} posts={posts} />
-	</div>
+	</section>
 </BaseLayout>
 
 <script>

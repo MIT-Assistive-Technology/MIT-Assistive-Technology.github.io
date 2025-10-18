@@ -11,11 +11,12 @@ interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
 	site: 'http://assistivetech.mit.edu/', // Write here your website url
-	author: 'Alison Soong', // Site author
+	author: 'MIT Assistive Technology Club', // Site author
 	title: 'MIT Assistive Technology Club', // Site title.
-	description: 'Designing today for a more inclusive tomorrow.', // Description to display in the meta tags
-	lang: 'en-GB',
-	ogLocale: 'en_GB',
+	description:
+		'MIT Assistive Technology Club: Creating inclusive technology through co-design with people with disabilities. Join us in building a more accessible world through collaborative engineering and design.', // Description to display in the meta tags
+	lang: 'en-US',
+	ogLocale: 'en_US',
 	shareMessage: 'Share this post', // Message to share a post on social media
 	paginationSize: 6 // Number of posts per page
 }

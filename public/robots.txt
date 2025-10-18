@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blog-template-gray.vercel.app/sitemap-index.xml
+Sitemap: http://assistivetech.mit.edu/sitemap-index.xml

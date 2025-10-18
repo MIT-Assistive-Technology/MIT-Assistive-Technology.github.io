@@ -28,7 +28,9 @@ export default defineConfig({
 			},
 			drafts: true
 		}),
-		sitemap(),
+		sitemap({
+			filter: (page) => !page.includes('admin')
+		}),
 		tailwind()
 	],
 	mdx: {
