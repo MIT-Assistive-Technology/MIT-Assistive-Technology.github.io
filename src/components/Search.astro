@@ -12,82 +12,73 @@ import SearchIcon from '@/components/icons/SearchIcon'
 	</button>
 	<dialog
 		aria-label='search'
-		class='h-full max-h-full w-full max-w-full border border-zinc-400 bg-white dark:bg-[#0a0910ec] shadow backdrop:backdrop-blur sm:mx-auto sm:mb-auto sm:mt-16 sm:h-max sm:max-h-[calc(100%-8rem)] sm:min-h-[15rem] sm:w-5/6 sm:max-w-[48rem] sm:rounded-md opacity-0'
+		class='h-full max-h-full w-full max-w-full border border-zinc-400 bg-white dark:bg-[#0a0910ec] shadow backdrop:backdrop-blur sm:mx-auto sm:mb-auto sm:mt-16 sm:h-max sm:max-h-[calc(100%-8rem)] sm:min-h-[15rem] sm:w-5/6 sm:max-w-[48rem] sm:rounded-md'
 	>
 		<div class='dialog-frame flex flex-col gap-4 p-6 pt-12 sm:pt-6'>
 			<button
 				data-close-modal
 				class='ms-auto cursor-pointer rounded-full bg-black text-white px-4 py-2 dark:bg-white dark:text-black'
-				>Close</button
 			>
-			{
-				import.meta.env.DEV ? (
-					<div class='mx-auto text-center dark:text-white'>
-						<p>
-							Search is only available in production builds. <br />
-							Try building and previewing the site to test it out locally.
-						</p>
+				Close
+			</button>
+			<div class='search-container dark:text-white'>
+				<!-- Mobile search input -->
+				<div class='md:hidden mb-4'>
+					<div class='relative'>
+						<input
+							type='text'
+							placeholder='Search...'
+							class='w-full p-3 pl-12 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-800 dark:text-white'
+							id='mobile-search-input'
+						/>
+						<div class='absolute left-3 top-1/2 transform -translate-y-1/2'>
+							<svg
+								class='w-5 h-5 text-gray-400'
+								fill='none'
+								stroke='currentColor'
+								viewBox='0 0 24 24'
+							>
+								<path
+									stroke-linecap='round'
+									stroke-linejoin='round'
+									stroke-width='2'
+									d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'></path>
+							</svg>
+						</div>
 					</div>
-				) : (
-					<div class='search-container dark:text-white'>
-						<div id='pagefind__search' />
-					</div>
-				)
-			}
+					<div id='mobile-search-results' class='mt-4 space-y-3'></div>
+				</div>
+				<!-- Desktop Pagefind search -->
+				<div class='hidden md:block'>
+					<div id='pagefind__search' class='min-h-[300px]'></div>
+				</div>
+			</div>
 		</div>
 	</dialog>
 </site-search>
 
 <script>
-	import { animate } from 'motion'
+	// @ts-ignore
+	declare global {
+		var pagefindInitialized: boolean
+	}
+
 	class SiteSearch extends HTMLElement {
 		constructor() {
 			super()
 			const openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]')!
 			const closeBtn = this.querySelector<HTMLButtonElement>('button[data-close-modal]')!
 			const dialog = this.querySelector('dialog')!
-			const dialogFrame = this.querySelector('.dialog-frame')!
 
-			const onWindowClick = (event: MouseEvent) => {
-				// make sure the click is outside the of the dialog
-				if (
-					document.body.contains(event.target as Node) &&
-					!dialogFrame.contains(event.target as Node)
-				)
-					closeModal()
-			}
-			const handleEscKey = (e: KeyboardEvent) => {
-				if (e.key === 'Escape' && dialog.open) {
-					closeModal()
-					window.removeEventListener('keydown', handleEscKey)
-				} else return
-			}
 			const openModal = (event?: MouseEvent) => {
 				dialog.showModal()
-
-				animate(
-					'dialog',
-					{
-						clipPath: [
-							'polygon(0 0, 100% 0, 100% -200%, -200% -200%)',
-							'polygon(0 0, 100% 0, 100% 100%, 0% 100%)'
-						],
-						opacity: [0, 1]
-					},
-					{ duration: 0.2 }
-				)
 				document.body.classList.add('overflow-hidden')
-				this.querySelector('input')?.focus()
 				event?.stopPropagation()
-				window.addEventListener('click', onWindowClick)
-				window.addEventListener('keydown', handleEscKey)
 			}
 
 			const closeModal = () => {
 				dialog.close()
 				document.body.classList.remove('overflow-hidden')
-				window.removeEventListener('click', onWindowClick)
-				window.addEventListener('keydown', handleEscKey)
 			}
 
 			openBtn.addEventListener('click', openModal)
@@ -103,20 +94,193 @@ import SearchIcon from '@/components/icons/SearchIcon'
 				}
 			})
 
-			window.addEventListener('DOMContentLoaded', () => {
-				if (import.meta.env.DEV) return
-				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1))
-				onIdle(async () => {
+			// Listen for Escape key
+			window.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && dialog.open) {
+					closeModal()
+				}
+			})
+
+			// Initialize PagefindUI - simplified approach
+			const initPagefind = async () => {
+				if (window.pagefindInitialized) return
+				window.pagefindInitialized = true
+
+				try {
+					console.log('Initializing PagefindUI...')
 					// @ts-ignore
 					const { PagefindUI } = await import('@pagefind/default-ui')
-					new PagefindUI({
+					console.log('PagefindUI imported successfully')
+
+					const pagefindInstance = new PagefindUI({
 						element: '#pagefind__search',
 						baseUrl: import.meta.env.BASE_URL,
 						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
 						showImages: false
 					})
+					console.log('PagefindUI initialized:', pagefindInstance)
+				} catch (error) {
+					console.error('Failed to load PagefindUI:', error)
+				}
+			}
+
+			// Try to initialize immediately
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initPagefind)
+			} else {
+				initPagefind()
+			}
+
+			// Add mobile search functionality - SIMPLE AND RELIABLE
+			const initMobileSearch = () => {
+				const mobileInput = document.getElementById('mobile-search-input')
+				const resultsContainer = document.getElementById('mobile-search-results')
+
+				console.log('Initializing mobile search...', { mobileInput, resultsContainer })
+
+				if (!mobileInput || !resultsContainer) {
+					console.error('Mobile search elements not found!')
+					return
+				}
+
+				// Define searchable content
+				const searchableContent = [
+					{
+						title: 'Spring 2025 Final Projects and Showcase',
+						url: '/post/20250501mitspringshowcase',
+						content:
+							'brought together students, codesigners, faculty, and community members to celebrate these incredible projects'
+					},
+					{
+						title: 'About MIT Assistive Technology',
+						url: '/post/20251012aboutmitat',
+						content:
+							'MIT Assistive Technology is a student organization dedicated to creating innovative solutions'
+					},
+					{
+						title: 'Our Team',
+						url: '/team',
+						content: 'Meet our dedicated team of students, faculty, and community partners'
+					},
+					{
+						title: 'Sponsors',
+						url: '/sponsors',
+						content: 'Our sponsors and partners who support our mission'
+					},
+					{
+						title: 'Contact',
+						url: '/contact',
+						content: 'Get in touch with MIT Assistive Technology'
+					}
+				]
+
+				// Initialize with visible content
+				resultsContainer.innerHTML = `
+					<div class="p-3 border border-gray-200 rounded-lg dark:border-gray-700">
+						<h3 class="font-semibold text-lg mb-2">
+							<a href="/team" class="text-blue-600 dark:text-blue-400 hover:underline">
+								Our Team
+							</a>
+						</h3>
+						<p class="text-gray-600 dark:text-gray-300 text-sm">
+							Meet our dedicated team of students, faculty, and community partners...
+						</p>
+					</div>
+					<div class="p-3 border border-gray-200 rounded-lg dark:border-gray-700">
+						<h3 class="font-semibold text-lg mb-2">
+							<a href="/post/20250501mitspringshowcase" class="text-blue-600 dark:text-blue-400 hover:underline">
+								Spring 2025 Final Projects and Showcase
+							</a>
+						</h3>
+						<p class="text-gray-600 dark:text-gray-300 text-sm">
+							brought together students, codesigners, faculty, and community members...
+						</p>
+					</div>
+				`
+
+				const performSearch = (query: string) => {
+					console.log('Performing search with query:', query)
+
+					if (query.length < 2) {
+						// Show default results
+						resultsContainer.innerHTML = `
+							<div class="p-3 border border-gray-200 rounded-lg dark:border-gray-700">
+								<h3 class="font-semibold text-lg mb-2">
+									<a href="/team" class="text-blue-600 dark:text-blue-400 hover:underline">
+										Our Team
+									</a>
+								</h3>
+								<p class="text-gray-600 dark:text-gray-300 text-sm">
+									Meet our dedicated team of students, faculty, and community partners...
+								</p>
+							</div>
+							<div class="p-3 border border-gray-200 rounded-lg dark:border-gray-700">
+								<h3 class="font-semibold text-lg mb-2">
+									<a href="/post/20250501mitspringshowcase" class="text-blue-600 dark:text-blue-400 hover:underline">
+										Spring 2025 Final Projects and Showcase
+									</a>
+								</h3>
+								<p class="text-gray-600 dark:text-gray-300 text-sm">
+									brought together students, codesigners, faculty, and community members...
+								</p>
+							</div>
+						`
+						return
+					}
+
+					// Filter results
+					const results = searchableContent.filter(
+						(item) =>
+							item.title.toLowerCase().includes(query) || item.content.toLowerCase().includes(query)
+					)
+
+					console.log('Search results found:', results.length)
+
+					// Display results
+					if (results.length === 0) {
+						resultsContainer.innerHTML = '<p class="text-gray-500">No results found</p>'
+					} else {
+						resultsContainer.innerHTML = results
+							.map(
+								(item) => `
+							<div class="p-3 border border-gray-200 rounded-lg dark:border-gray-700">
+								<h3 class="font-semibold text-lg mb-2">
+									<a href="${item.url}" class="text-blue-600 dark:text-blue-400 hover:underline">
+										${item.title}
+									</a>
+								</h3>
+								<p class="text-gray-600 dark:text-gray-300 text-sm">
+									${item.content.substring(0, 100)}...
+								</p>
+							</div>
+						`
+							)
+							.join('')
+					}
+				}
+
+				// Add input event listener
+				mobileInput.addEventListener('input', (e) => {
+					const query = (e.target as HTMLInputElement).value.toLowerCase()
+					performSearch(query)
 				})
-			})
+
+				// Add keydown event listener for Enter key
+				mobileInput.addEventListener('keydown', (e) => {
+					if (e.key === 'Enter') {
+						const query = (e.target as HTMLInputElement).value.toLowerCase()
+						console.log('Enter key pressed, performing search:', query)
+						performSearch(query)
+						e.preventDefault()
+					}
+				})
+			}
+
+			// Initialize immediately and also on DOM ready
+			initMobileSearch()
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initMobileSearch)
+			}
 		}
 	}
 
@@ -130,5 +294,49 @@ import SearchIcon from '@/components/icons/SearchIcon'
 		--pagefind-ui-background: #152028;
 		--pagefind-ui-border: #152028;
 		--pagefind-ui-tag: #152028;
+	}
+
+	/* Ensure Pagefind results are visible */
+	#pagefind__search {
+		min-height: 300px;
+	}
+
+	#pagefind__search input {
+		width: 100%;
+		padding: 12px 12px 12px 48px !important;
+		border: 1px solid #ccc;
+		border-radius: 8px;
+		margin-bottom: 16px;
+		text-indent: 0 !important;
+	}
+
+	#pagefind__search .pagefind-ui__search-input {
+		position: relative;
+	}
+
+	#pagefind__search .pagefind-ui__search-input::before {
+		content: '';
+		position: absolute;
+		left: 12px;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 20px;
+		height: 20px;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-size: contain;
+		pointer-events: none;
+		z-index: 1;
+	}
+
+	#pagefind__search .pagefind-ui__results {
+		margin-top: 16px;
+	}
+
+	#pagefind__search .pagefind-ui__result {
+		margin-bottom: 16px;
+		padding: 12px;
+		border: 1px solid #eee;
+		border-radius: 8px;
 	}
 </style>
