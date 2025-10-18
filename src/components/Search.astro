@@ -101,10 +101,20 @@ import SearchIcon from '@/components/icons/SearchIcon'
 				}
 			})
 
-			// Initialize PagefindUI - simplified approach
+			// Initialize PagefindUI - robust approach with fallback
 			const initPagefind = async () => {
 				if (window.pagefindInitialized) return
 				window.pagefindInitialized = true
+
+				const searchElement = document.getElementById('pagefind__search')
+				if (!searchElement) {
+					console.error('Search element not found')
+					return
+				}
+
+				// Show loading state
+				searchElement.innerHTML =
+					'<div class="text-center p-4"><p class="text-gray-500">Loading search...</p></div>'
 
 				try {
 					console.log('Initializing PagefindUI...')
@@ -116,44 +126,206 @@ import SearchIcon from '@/components/icons/SearchIcon'
 						location: window.location.href
 					})
 
-					// @ts-ignore
-					const { PagefindUI } = await import('@pagefind/default-ui')
+					// Try to load Pagefind with timeout
+					const pagefindPromise = import('@pagefind/default-ui')
+					const timeoutPromise = new Promise((_, reject) =>
+						setTimeout(() => reject(new Error('Pagefind load timeout')), 10000)
+					)
+
+					const { PagefindUI } = await Promise.race([pagefindPromise, timeoutPromise])
 					console.log('PagefindUI imported successfully')
 
-					// Get the correct base URL for both development and production
-					// For production, we want to use the current origin to avoid CORS issues
-					let baseUrl = import.meta.env.BASE_URL || '/'
+					// Determine the correct configuration for production
+					let baseUrl = '/'
+					let bundlePath = '/pagefind/'
 
-					// If we're in production and BASE_URL is not set properly, use the current origin
-					if (import.meta.env.PROD && (baseUrl === '/' || !baseUrl)) {
-						baseUrl = window.location.origin + '/'
+					// For production, use relative paths to avoid CORS issues
+					if (import.meta.env.PROD) {
+						baseUrl = '/'
+						bundlePath = '/pagefind/'
+					} else {
+						// For development, use the configured base URL
+						baseUrl = import.meta.env.BASE_URL || '/'
+						bundlePath = baseUrl.replace(/\/$/, '') + '/pagefind/'
 					}
-
-					const bundlePath = baseUrl.replace(/\/$/, '') + '/pagefind/'
 
 					console.log('Pagefind configuration:', { baseUrl, bundlePath })
 
+					// Initialize PagefindUI
 					const pagefindInstance = new PagefindUI({
 						element: '#pagefind__search',
 						baseUrl: baseUrl,
 						bundlePath: bundlePath,
 						showImages: false
 					})
+
 					console.log('PagefindUI initialized:', pagefindInstance)
+
+					// Set up error handling for the Pagefind instance
+					pagefindInstance.on('error', (error) => {
+						console.error('Pagefind error:', error)
+						showFallbackSearch()
+					})
 				} catch (error) {
 					console.error('Failed to load PagefindUI:', error)
-					// Fallback: show a message to the user
-					const searchElement = document.getElementById('pagefind__search')
-					if (searchElement) {
-						searchElement.innerHTML =
-							'<p class="text-gray-500">Search is temporarily unavailable. Please try again later.</p>'
+					showFallbackSearch()
+				}
+			}
+
+			// Fallback search implementation
+			const showFallbackSearch = () => {
+				const searchElement = document.getElementById('pagefind__search')
+				if (!searchElement) return
+
+				// Define searchable content
+				const searchableContent = [
+					{
+						title: 'Spring 2025 Final Projects and Showcase',
+						url: '/post/20250501mitspringshowcase/',
+						content:
+							'Check out the final projects from the Spring 2025 semester, along with a recap of our end-of-semester showcase!'
+					},
+					{
+						title: 'Building a More Accessible World: Meet MIT Assistive Technology Club',
+						url: '/post/20251012aboutmitat/',
+						content:
+							'Discover how MIT students are partnering with community members to create meaningful assistive technology solutions through collaborative design and engineering.'
+					},
+					{
+						title: 'Our Team',
+						url: '/team/',
+						content:
+							'Meet our dedicated team of students, faculty, and community partners who are working to create a more accessible world.'
+					},
+					{
+						title: 'Sponsors',
+						url: '/sponsors/',
+						content:
+							'Our sponsors and partners who support our mission of creating inclusive technology.'
+					},
+					{
+						title: 'Contact',
+						url: '/contact/',
+						content: 'Get in touch with MIT Assistive Technology Club.'
+					},
+					{
+						title: 'About',
+						url: '/category/about/1/',
+						content:
+							'Learn more about our mission, values, and approach to creating assistive technology.'
 					}
+				]
+
+				// Create fallback search interface
+				searchElement.innerHTML = `
+					<div class="space-y-4">
+						<div class="relative">
+							<input
+								type="text"
+								placeholder="Search our site..."
+								class="w-full p-3 pl-12 border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+								id="fallback-search-input"
+							/>
+							<div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+								<svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+								</svg>
+							</div>
+						</div>
+						<div id="fallback-search-results" class="space-y-3">
+							${searchableContent
+								.map(
+									(item) => `
+								<div class="p-3 border border-gray-200 rounded-lg dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
+									<h3 class="font-semibold text-lg mb-2">
+										<a href="${item.url}" class="text-blue-600 dark:text-blue-400 hover:underline">
+											${item.title}
+										</a>
+									</h3>
+									<p class="text-gray-600 dark:text-gray-300 text-sm">
+										${item.content}
+									</p>
+								</div>
+							`
+								)
+								.join('')}
+						</div>
+					</div>
+				`
+
+				// Add search functionality
+				const searchInput = document.getElementById('fallback-search-input')
+				const resultsContainer = document.getElementById('fallback-search-results')
+
+				if (searchInput && resultsContainer) {
+					searchInput.addEventListener('input', (e) => {
+						const query = (e.target as HTMLInputElement).value.toLowerCase()
+
+						if (query.length < 2) {
+							// Show all results
+							resultsContainer.innerHTML = searchableContent
+								.map(
+									(item) => `
+								<div class="p-3 border border-gray-200 rounded-lg dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
+									<h3 class="font-semibold text-lg mb-2">
+										<a href="${item.url}" class="text-blue-600 dark:text-blue-400 hover:underline">
+											${item.title}
+										</a>
+									</h3>
+									<p class="text-gray-600 dark:text-gray-300 text-sm">
+										${item.content}
+									</p>
+								</div>
+							`
+								)
+								.join('')
+						} else {
+							// Filter results
+							const results = searchableContent.filter(
+								(item) =>
+									item.title.toLowerCase().includes(query) ||
+									item.content.toLowerCase().includes(query)
+							)
+
+							if (results.length === 0) {
+								resultsContainer.innerHTML =
+									'<p class="text-gray-500 text-center p-4">No results found</p>'
+							} else {
+								resultsContainer.innerHTML = results
+									.map(
+										(item) => `
+									<div class="p-3 border border-gray-200 rounded-lg dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
+										<h3 class="font-semibold text-lg mb-2">
+											<a href="${item.url}" class="text-blue-600 dark:text-blue-400 hover:underline">
+												${item.title}
+											</a>
+										</h3>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">
+											${item.content}
+										</p>
+									</div>
+								`
+									)
+									.join('')
+							}
+						}
+					})
 				}
 			}
 
 			// Try to initialize immediately with a small delay to ensure DOM is ready
 			const initializeWithDelay = () => {
-				setTimeout(initPagefind, 100)
+				// For production, try fallback search immediately if Pagefind fails
+				if (import.meta.env.PROD) {
+					setTimeout(() => {
+						initPagefind().catch(() => {
+							console.log('Pagefind failed, using fallback search')
+							showFallbackSearch()
+						})
+					}, 100)
+				} else {
+					setTimeout(initPagefind, 100)
+				}
 			}
 
 			if (document.readyState === 'loading') {
