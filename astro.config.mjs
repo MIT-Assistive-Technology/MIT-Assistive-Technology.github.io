@@ -35,7 +35,7 @@ export default defineConfig({
 	],
 	mdx: {
 		components: {
-			Image: './src/components/mdx/Image.astro'
+			Image: '/src/components/mdx/Image.astro'
 		}
 	}
 })

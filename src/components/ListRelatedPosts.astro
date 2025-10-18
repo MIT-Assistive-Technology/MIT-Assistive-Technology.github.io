@@ -18,11 +18,10 @@ const { posts } = Astro.props
 				return (
 					<div class='flex flex-wrap gap-2'>
 						<div class='min-h-full'>
-							<Image
+							<img
 								src={post.data.heroImage}
 								width={200}
 								height={200}
-								format='webp'
 								class='w-16 h-16 object-cover rounded-full  '
 								alt={`img of ${post.data.title}`}
 							/>

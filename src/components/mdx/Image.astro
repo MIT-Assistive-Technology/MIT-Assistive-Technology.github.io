@@ -14,6 +14,11 @@ const { src, alt, title } = Astro.props
 // TinaCMS stores images with src/assets/images path, but we need relative path from content
 let imageSrc = src
 
+// If the path starts with /src/assets/images, convert to relative path
+if (src.startsWith('/src/assets/images/')) {
+	imageSrc = `../../assets/images/${src.replace('/src/assets/images/', '')}`
+}
+
 // If the path starts with src/assets/images, convert to relative path
 if (src.startsWith('src/assets/images/')) {
 	imageSrc = `../../assets/images/${src.replace('src/assets/images/', '')}`
