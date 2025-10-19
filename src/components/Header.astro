@@ -7,8 +7,11 @@ import ToggleTheme from './ToggleTheme.astro'
 import { SOCIALNETWORKS } from '@/data/links'
 ---
 
-<header class='relative flex items-center justify-between h-12 font-semibold'>
-	<a class='text-lg z-10 relative' href='/'>Home</a>
+<header class='relative flex items-center justify-between h-12 font-semibold' role='banner'>
+	<a class='text-lg z-10 relative' href='/' aria-label='MIT Assistive Technology Club - Home'>
+		<span class='sr-only'>MIT Assistive Technology Club</span>
+		<span aria-hidden='true'>Home</span>
+	</a>
 
 	<!-- Hamburger button for mobile - positioned outside the drawer -->
 	<button
@@ -52,8 +55,11 @@ import { SOCIALNETWORKS } from '@/data/links'
 	<div
 		id='astro-header-drawer'
 		class='shadow rounded-l-lg bg-white dark:bg-[#0a0910] absolute transition-transform duration-300 ease-in translate-x-96 top-12 -right-5 pt-6 pb-8 h-[360px] w-[300px] z-40 md:hidden pointer-events-auto'
+		role='navigation'
+		aria-label='Main navigation'
+		aria-hidden='true'
 	>
-		<nav class='flex h-full flex-col text-left'>
+		<nav class='flex h-full flex-col text-left' role='menubar'>
 			<div class='flex flex-col gap-4 pl-9'>
 				<HeaderLink href='/' class='flex items-center gap-1 text-lg'>Home</HeaderLink>
 				<HeaderLink href='/category/about/1' class='flex items-center gap-1 text-lg'>

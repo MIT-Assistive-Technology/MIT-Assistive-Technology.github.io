@@ -26,6 +26,7 @@ const posts = await getPosts(MAX_POSTS)
 				loading='eager'
 				width='800'
 				height='320'
+				decoding='async'
 			/>
 		</div>
 		<h1 class='text-4xl font-bold mb-2 text-center'>Welcome to MIT Assistive Technology Club</h1>
@@ -41,8 +42,8 @@ const posts = await getPosts(MAX_POSTS)
 		</p>
 		<a
 			href='/category/about/1'
-			class='text-white font-semibold bg-indigo-700 px-4 py-2 mb-10 rounded transition hover:bg-indigo-900'
-			>Learn more about us</a
+			class='text-white font-semibold bg-indigo-700 px-4 py-2 mb-10 rounded transition hover:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+			aria-label='Learn more about MIT Assistive Technology Club'>Learn more about us</a
 		>
 	</section>
 
