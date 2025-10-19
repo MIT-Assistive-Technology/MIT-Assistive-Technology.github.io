@@ -36,11 +36,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Build with Astro
-        run: pnpm run build
-
-      - name: Run Pagefind
-        run: pnpm run postbuild
+      - name: Build with Astro and Pagefind
+        run: |
+          pnpm run build
+          pnpm run postbuild
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
