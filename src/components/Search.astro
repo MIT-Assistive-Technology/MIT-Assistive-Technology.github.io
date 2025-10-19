@@ -119,8 +119,8 @@ const { id = 'search' } = Astro.props
 					if (searchElement) {
 						new PagefindUI({
 							element: searchElement,
-							baseUrl: import.meta.env.BASE_URL,
-							bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
+							baseUrl: '/',
+							bundlePath: '/pagefind/',
 							showImages: false
 						})
 					}
