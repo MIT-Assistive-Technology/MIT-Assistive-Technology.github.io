@@ -40,6 +40,10 @@ jobs:
         run: |
           pnpm run build
           pnpm run postbuild
+          echo "Checking if Pagefind files were generated:"
+          ls -la dist/pagefind/
+          echo "Pagefind files found:"
+          find dist/pagefind/ -type f | head -10
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
