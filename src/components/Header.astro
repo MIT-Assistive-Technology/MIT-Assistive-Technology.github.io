@@ -48,12 +48,6 @@ import { SOCIALNETWORKS } from '@/data/links'
 		</div>
 	</div>
 
-	<!-- Mobile search and theme toggle - visible on mobile only -->
-	<div class='flex items-center gap-3 md:hidden'>
-		<Search id='mobile-search' />
-		<ToggleTheme />
-	</div>
-
 	<!-- Mobile drawer menu -->
 	<div
 		id='astro-header-drawer'
@@ -76,6 +70,8 @@ import { SOCIALNETWORKS } from '@/data/links'
 
 			<!-- Icons section - absolutely positioned at bottom left -->
 			<div class='absolute bottom-8 left-14 flex items-center gap-4'>
+				<Search id='mobile-search' />
+				<ToggleTheme />
 				{
 					SOCIALNETWORKS.map((network) => (
 						<HeaderLink
