@@ -54,7 +54,7 @@ import { SOCIALNETWORKS } from '@/data/links'
 	<!-- Mobile drawer menu -->
 	<div
 		id='astro-header-drawer'
-		class='shadow rounded-l-lg bg-white dark:bg-[#0a0910] absolute transition-transform duration-300 ease-in translate-x-96 top-12 -right-5 pt-6 pb-8 h-[360px] w-[300px] z-40 md:hidden pointer-events-auto'
+		class='shadow rounded-l-lg bg-white dark:bg-[#0a0910] absolute transition-transform duration-300 ease-in translate-x-96 top-12 -right-5 pt-6 pb-8 h-[380px] w-[300px] z-40 md:hidden pointer-events-auto'
 		role='navigation'
 		aria-label='Main navigation'
 		aria-hidden='true'
@@ -64,6 +64,9 @@ import { SOCIALNETWORKS } from '@/data/links'
 				<HeaderLink href='/' class='flex items-center gap-1 text-lg'>Home</HeaderLink>
 				<HeaderLink href='/category/about/1' class='flex items-center gap-1 text-lg'>
 					About
+				</HeaderLink>
+				<HeaderLink href='/category/projects/1' class='flex items-center gap-1 text-lg'>
+					Projects
 				</HeaderLink>
 				<HeaderLink href='/team' class='flex items-center gap-1 text-lg'>Team</HeaderLink>
 				<HeaderLink href='/sponsors' class='flex items-center gap-1 text-lg'>Sponsors</HeaderLink>
@@ -75,7 +78,7 @@ import { SOCIALNETWORKS } from '@/data/links'
 			</div>
 
 			<!-- Icons section - absolutely positioned at bottom left -->
-			<div class='absolute bottom-8 left-14 flex items-center gap-4'>
+			<div class='absolute bottom-4 left-14 flex items-center gap-4'>
 				<Search id='mobile-search' />
 				<ToggleTheme />
 				{
