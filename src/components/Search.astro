@@ -47,29 +47,47 @@ const { id = 'search' } = Astro.props
 <script>
 	import { animate } from 'motion'
 	class SiteSearch extends HTMLElement {
+		private openBtn: HTMLButtonElement | null = null
+		private closeBtn: HTMLButtonElement | null = null
+		private dialog: HTMLDialogElement | null = null
+		private dialogFrame: HTMLElement | null = null
+		private pagefindInitialized = false
+		private initialized = false
+
 		constructor() {
 			super()
-			const openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]')!
-			const closeBtn = this.querySelector<HTMLButtonElement>('button[data-close-modal]')!
-			const dialog = this.querySelector('dialog')!
-			const dialogFrame = this.querySelector('.dialog-frame')!
+		}
+
+		connectedCallback() {
+			// Prevent duplicate initialization
+			if (this.initialized) return
+
+			this.openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]')
+			this.closeBtn = this.querySelector<HTMLButtonElement>('button[data-close-modal]')
+			this.dialog = this.querySelector('dialog')
+			this.dialogFrame = this.querySelector('.dialog-frame')
+
+			if (!this.openBtn || !this.closeBtn || !this.dialog || !this.dialogFrame) {
+				console.error('Search component: Missing required elements')
+				return
+			}
 
 			const onWindowClick = (event: MouseEvent) => {
 				// make sure the click is outside the of the dialog
 				if (
 					document.body.contains(event.target as Node) &&
-					!dialogFrame.contains(event.target as Node)
+					!this.dialogFrame!.contains(event.target as Node)
 				)
-					closeModal()
+					this.closeModal()
 			}
 			const handleEscKey = (e: KeyboardEvent) => {
-				if (e.key === 'Escape' && dialog.open) {
-					closeModal()
+				if (e.key === 'Escape' && this.dialog!.open) {
+					this.closeModal()
 					window.removeEventListener('keydown', handleEscKey)
 				} else return
 			}
 			const openModal = (event?: MouseEvent) => {
-				dialog.showModal()
+				this.dialog!.showModal()
 
 				animate(
 					'dialog',
@@ -89,43 +107,65 @@ const { id = 'search' } = Astro.props
 				window.addEventListener('keydown', handleEscKey)
 			}
 
-			const closeModal = () => {
-				dialog.close()
-				document.body.classList.remove('overflow-hidden')
-				window.removeEventListener('click', onWindowClick)
-				window.addEventListener('keydown', handleEscKey)
-			}
-
-			openBtn.addEventListener('click', openModal)
-			openBtn.disabled = false
-			closeBtn.addEventListener('click', closeModal)
-			document.addEventListener('astro:after-swap', closeModal)
+			this.openModal = openModal
+			this.openBtn.addEventListener('click', openModal)
+			this.openBtn.disabled = false
+			this.closeBtn.addEventListener('click', () => this.closeModal())
+			document.addEventListener('astro:after-swap', () => this.closeModal())
 
 			// Listen for `/` keyboard shortcut
 			window.addEventListener('keydown', (e) => {
-				if (e.key === '/' && !dialog.open) {
+				if (e.key === '/' && !this.dialog!.open) {
 					openModal()
 					e.preventDefault()
 				}
 			})
 
-			window.addEventListener('DOMContentLoaded', () => {
-				if (import.meta.env.DEV) return
+			this.initializePagefind()
+			this.initialized = true
+		}
+
+		private openModal = (event?: MouseEvent) => {}
+
+		private closeModal = () => {
+			if (this.dialog) {
+				this.dialog.close()
+				document.body.classList.remove('overflow-hidden')
+			}
+		}
+
+		private initializePagefind = () => {
+			if (import.meta.env.DEV || this.pagefindInitialized) return
+
+			const initialize = async () => {
 				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1))
 				onIdle(async () => {
-					// @ts-ignore
-					const { PagefindUI } = await import('@pagefind/default-ui')
-					const searchElement = this.querySelector('#pagefind__search')
-					if (searchElement) {
-						new PagefindUI({
-							element: searchElement,
-							baseUrl: '/',
-							bundlePath: '/pagefind/',
-							showImages: false
-						})
+					try {
+						// @ts-ignore
+						const { PagefindUI } = await import('@pagefind/default-ui')
+						const searchElement = this.querySelector('#pagefind__search')
+						if (searchElement && !this.pagefindInitialized) {
+							new PagefindUI({
+								element: searchElement,
+								baseUrl: '/',
+								bundlePath: '/pagefind/',
+								showImages: false
+							})
+							this.pagefindInitialized = true
+						}
+					} catch (error) {
+						console.error('Failed to initialize PagefindUI:', error)
 					}
 				})
-			})
+			}
+
+			// Check if DOM is already loaded
+			if (document.readyState === 'loading') {
+				window.addEventListener('DOMContentLoaded', initialize)
+			} else {
+				// DOM is already loaded, initialize immediately
+				initialize()
+			}
 		}
 	}
 
