@@ -8,6 +8,13 @@ import { siteConfig } from '@/site-config'
 
 const MAX_POSTS = 5 // max number of posts to show on the home page
 const posts = await getPosts(MAX_POSTS)
+
+// Calendar constants
+const calendarId =
+	'ZDkxYWY0NjFiN2NmMDVjZTYzNDdhNDBkYzc4ZmRkNDcwNmI4NDg1MTcwMzAwMWU3ZWI0Yjk0ZWRhYjNhZDNkZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t'
+const encodedCalendarId = encodeURIComponent(calendarId)
+const calendarEmbedUrl = `https://calendar.google.com/calendar/embed?src=${encodedCalendarId}&ctz=America%2FNew_York`
+const calendarAddUrl = `https://calendar.google.com/calendar/render?cid=${encodedCalendarId}`
 ---
 
 <BaseLayout title='Home'>
@@ -52,8 +59,76 @@ const posts = await getPosts(MAX_POSTS)
 		>
 	</section>
 
+	<!-- Calendar Section -->
+	<section class='mb-8 p-6 rounded-lg'>
+		<div class='max-w-6xl mx-auto'>
+			<!-- Next Event Display -->
+			<div class='mb-6 text-center'>
+				<h2 class='text-3xl font-bold mb-4 text-gray-900 dark:text-white'>Upcoming Events</h2>
+				<div
+					id='next-event'
+					class='text-xl md:text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4'
+				>
+					Loading next event...
+				</div>
+			</div>
+
+			<!-- Calendar and Button Container -->
+			<div class='flex flex-col lg:flex-row gap-6 items-stretch justify-center'>
+				<!-- Small Calendar Embed -->
+				<div
+					class='w-full lg:w-[45%] bg-white dark:bg-gray-800 shadow-lg rounded-lg p-2 overflow-hidden flex'
+				>
+					<div class='relative w-full h-full'>
+						<iframe
+							src={calendarEmbedUrl}
+							style='border: 0; width: 100%; height: 100%;'
+							width='600'
+							height='450'
+							frameborder='0'
+							scrolling='no'
+							title='MIT Assistive Technology Calendar Preview'></iframe>
+					</div>
+				</div>
+
+				<!-- Add to Calendar Button and Link -->
+				<div class='w-full lg:w-[45%] flex flex-col items-center justify-start gap-4'>
+					<a
+						href={calendarAddUrl}
+						target='_blank'
+						rel='noopener noreferrer'
+						class='w-full inline-flex items-center justify-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
+					>
+						<svg class='w-5 h-5 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+							<path
+								stroke-linecap='round'
+								stroke-linejoin='round'
+								stroke-width='2'
+								d='M12 6v6m0 0v6m0-6h6m-6 0H6'></path>
+						</svg>
+						Add to Google Calendar
+					</a>
+					<a
+						href='/calendar'
+						class='text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors underline'
+					>
+						View Full Calendar
+					</a>
+					<div class='w-full mt-auto flex-1 flex items-end'>
+						<img
+							src='/src/assets/images/atspring25-29.jpg'
+							alt='MIT Assistive Technology Club Spring 2025 showcase event'
+							class='w-full h-full object-cover rounded-lg shadow-md'
+							loading='lazy'
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<section>
-		<h2 class='text-2xl font-bold mb-6 text-center'>Latest News & Updates</h2>
+		<h2 class='text-3xl font-bold mb-6 text-center'>Latest News & Updates</h2>
 		<ListPosts FirstBig={true} posts={posts} />
 	</section>
 </BaseLayout>
@@ -73,5 +148,151 @@ const posts = await getPosts(MAX_POSTS)
 				offset: [0, 0.55, 0.75]
 			}
 		)
+	}
+
+	// Fetch next event from Google Calendar
+	//
+	// TO MAKE THIS WORK:
+	// 1. Make sure your Google Calendar is public:
+	//    - Go to Google Calendar Settings > Settings for my calendars > [Your Calendar]
+	//    - Under "Access permissions", check "Make available to public"
+	//    - Also check "See all event details" if you want full event info
+	//
+	// 2. Get your calendar's public iCal URL:
+	//    - In Calendar Settings, find "Integrate calendar"
+	//    - Copy the "Public address in iCal format" URL
+	//    - It should look like: https://calendar.google.com/calendar/ical/.../public/basic.ics
+	//
+	// 3. If you get CORS errors, you have two options:
+	//    Option A: Use a CORS proxy (for development/testing)
+	//    Option B: Fetch server-side (recommended for production)
+	//
+	async function fetchNextEvent() {
+		const nextEventElement = document.getElementById('next-event')
+		if (!nextEventElement) return
+
+		try {
+			// Calendar ID from your calendar settings
+			const calendarId =
+				'ZDkxYWY0NjFiN2NmMDVjZTYzNDdhNDBkYzc4ZmRkNDcwNmI4NDg1MTcwMzAwMWU3ZWI0Yjk0ZWRhYjNhZDNkZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t'
+
+			// Try direct iCal URL first
+			const encodedId = encodeURIComponent(calendarId)
+			const icalUrl = `https://calendar.google.com/calendar/ical/${encodedId}/public/basic.ics`
+
+			// Alternative: If CORS fails, you can use a proxy (uncomment and replace with your proxy)
+			// const proxyUrl = 'https://corsproxy.io/?'
+			// const icalUrl = `${proxyUrl}https://calendar.google.com/calendar/ical/${encodedId}/public/basic.ics`
+
+			const response = await fetch(icalUrl, {
+				method: 'GET',
+				mode: 'cors', // This might fail if calendar isn't public or CORS isn't enabled
+				headers: {
+					Accept: 'text/calendar'
+				}
+			})
+
+			if (!response.ok) {
+				throw new Error(`Failed to fetch calendar: ${response.status} ${response.statusText}`)
+			}
+
+			const icalText = await response.text()
+
+			// Parse iCal to find next upcoming event
+			interface CalendarEvent {
+				dtstart?: string
+				summary?: string
+				dtend?: string
+			}
+
+			const events: CalendarEvent[] = []
+			const lines = icalText.split('\n')
+			let currentEvent: CalendarEvent | null = null
+
+			for (let i = 0; i < lines.length; i++) {
+				const line = lines[i].trim()
+				if (line === 'BEGIN:VEVENT') {
+					currentEvent = {}
+				} else if (line === 'END:VEVENT' && currentEvent) {
+					if (currentEvent.dtstart && currentEvent.summary) {
+						events.push(currentEvent)
+					}
+					currentEvent = null
+				} else if (currentEvent) {
+					if (line.startsWith('DTSTART')) {
+						const dateStr = line.split(':')[1] || line.split(';')[0].split(':')[1]
+						currentEvent.dtstart = dateStr
+					} else if (line.startsWith('SUMMARY:')) {
+						currentEvent.summary = line.substring(8)
+					} else if (line.startsWith('DTEND')) {
+						const dateStr = line.split(':')[1] || line.split(';')[0].split(':')[1]
+						currentEvent.dtend = dateStr
+					}
+				}
+			}
+
+			// Find next upcoming event
+			const now = new Date()
+			const upcomingEvents = events
+				.map((event) => {
+					// Parse date (format: YYYYMMDDTHHMMSS or YYYYMMDD)
+					if (!event.dtstart || !event.summary) return null
+
+					let dateStr = event.dtstart
+					if (dateStr.includes('T')) {
+						dateStr = dateStr.substring(0, 15)
+					} else {
+						dateStr = dateStr.substring(0, 8)
+					}
+
+					const year = parseInt(dateStr.substring(0, 4), 10)
+					const month = parseInt(dateStr.substring(4, 6), 10) - 1
+					const day = parseInt(dateStr.substring(6, 8), 10)
+					const hour = dateStr.length > 8 ? parseInt(dateStr.substring(9, 11) || '0', 10) : 0
+					const minute = dateStr.length > 10 ? parseInt(dateStr.substring(11, 13) || '0', 10) : 0
+
+					return {
+						title: event.summary,
+						date: new Date(year, month, day, hour, minute)
+					}
+				})
+				.filter((event): event is { title: string; date: Date } => event !== null)
+				.filter((event) => event.date >= now)
+				.sort((a, b) => a.date.getTime() - b.date.getTime())
+
+			if (upcomingEvents.length > 0) {
+				const nextEvent = upcomingEvents[0]
+				const dateStr = nextEvent.date.toLocaleDateString('en-US', {
+					weekday: 'long',
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit'
+				})
+				nextEventElement.textContent = `${nextEvent.title} - ${dateStr}`
+			} else {
+				nextEventElement.textContent = 'No upcoming events scheduled'
+			}
+		} catch (error) {
+			console.error('Error fetching next event:', error)
+
+			// Provide helpful error message
+			if (error instanceof TypeError && error.message.includes('fetch')) {
+				nextEventElement.textContent =
+					'Unable to load events. Please check our calendar page for upcoming events.'
+				console.error('CORS or network error. Consider using a server-side solution or CORS proxy.')
+			} else {
+				nextEventElement.textContent = 'Check our calendar for upcoming events'
+			}
+
+			// Log detailed error for debugging
+			console.error('Full error details:', error)
+		}
+	}
+
+	// Fetch next event when page loads
+	if (typeof window !== 'undefined') {
+		fetchNextEvent()
 	}
 </script>
