@@ -1,0 +1,58 @@
+---
+const INTEREST_FORM_URL =
+	'https://docs.google.com/forms/d/e/1FAIpQLSfYNexSzz3gpw43hAr_WQfY55469kJbH8_zxMi589dN2gU5nQ/viewform'
+---
+
+<div
+	id='top-banner'
+	class='sticky top-0 z-50 bg-indigo-700 text-white'
+	role='region'
+	aria-label='Announcement'
+>
+	<div
+		class='max-w-6xl mx-auto px-4 py-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm sm:text-base text-center relative'
+	>
+		<span>
+			🎉 Join us for our <strong>First GBM on 9/13</strong>! Sign up for our interest list to stay
+			in the loop.
+		</span>
+		<a
+			href={INTEREST_FORM_URL}
+			target='_blank'
+			rel='noopener noreferrer'
+			class='font-semibold underline underline-offset-2 hover:text-indigo-200 whitespace-nowrap'
+		>
+			Sign up now &rarr;
+		</a>
+		<button
+			id='top-banner-close'
+			type='button'
+			aria-label='Dismiss announcement'
+			class='absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-white'
+		>
+			<svg class='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
+				<path
+					stroke-linecap='round'
+					stroke-linejoin='round'
+					stroke-width='2'
+					d='M6 18L18 6M6 6l12 12'></path>
+			</svg>
+		</button>
+	</div>
+</div>
+
+<script>
+	const STORAGE_KEY = 'top-banner-dismissed-2025-09-13'
+	const banner = document.getElementById('top-banner')
+	const closeButton = document.getElementById('top-banner-close')
+
+	if (banner && localStorage.getItem(STORAGE_KEY) === 'true') {
+		banner.style.display = 'none'
+	}
+
+	closeButton?.addEventListener('click', () => {
+		if (!banner) return
+		banner.style.display = 'none'
+		localStorage.setItem(STORAGE_KEY, 'true')
+	})
+</script>
