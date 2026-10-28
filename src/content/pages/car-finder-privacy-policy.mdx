@@ -8,7 +8,7 @@ pubDate: '2024-01-01'
 	<strong>Privacy Policy for CurbToCar</strong>
 </h1>
 <p>
-	<strong>Effective Date</strong>: 12/31/2025
+	<strong>Effective Date</strong>: 10/28/2026
 	<br />
 	The MIT Assistive Technology Club is dedicated to safeguarding the privacy and confidentiality of
 	your personal information. This privacy policy explains how we collect, use, share, and protect
@@ -62,6 +62,9 @@ pubDate: '2024-01-01'
 			<em>Example</em>: We collect your device type (iPhone, Android) to ensure the app is
 			compatible and runs smoothly on your device.
 		</p>
+		We also generate a random identifier when you install the app. It is not linked to your name,
+		account, or contacts. It is used to protect the service from abuse and to count how many devices
+		use it.
 	</li>
 	<li>
 		<strong>IP Address</strong>
@@ -102,11 +105,11 @@ pubDate: '2024-01-01'
 	<li>
 		<strong>AI-Powered Matching</strong>
 		<br />
-		We share API results from Eydea Recognition along with your vehicle description with OpenAI to
-		match detected vehicles with your specific vehicle.
+		We share cropped images of detected vehicles, API results from Eydea Recognition, and your
+		vehicle description with OpenAI to match detected vehicles with your specific vehicle.
 		<p>
-			<em>Example</em>: OpenAI helps determine if the "blue sedan" detected in an image matches your
-			"Blue Honda Civic" description.
+			<em>Example</em>: OpenAI helps determine if the "blue sedan" in a cropped image of a detected
+			vehicle matches your "Blue Honda Civic" description.
 		</p>
 	</li>
 	<li>
@@ -117,6 +120,12 @@ pubDate: '2024-01-01'
 			<em>Example</em>: We may analyze how often the app successfully identifies vehicles to improve
 			our detection algorithms.
 		</p>
+		To keep the service reliable, our servers record basic information about each request the app
+		makes: which service was called, whether it succeeded, how long it took, and its size. We do not
+		record the content of requests or your IP address in these metrics. To count active users
+		without tracking them, we store only a one-way code derived from the random app-install
+		identifier. The code changes every day, so activity cannot be linked across days. These metrics
+		are kept for about three months. They are not used for advertising or tracking.
 	</li>
 	<li>
 		<strong>Technical Support</strong>
@@ -136,11 +145,10 @@ pubDate: '2024-01-01'
 	<li>
 		<strong>Consent</strong>
 		<br />
-		We process your personal information when you have given us explicit consent, such as agreeing
-		to receive marketing communications or enabling location tracking.
+		We process your personal information when you have given us explicit consent, such as allowing
+		the app to use your camera.
 		<br />
-		<em>Example</em>: You can withdraw your consent at any time by changing your app settings or
-		unsubscribing from emails.
+		<em>Example</em>: You can withdraw your consent at any time by changing your device settings.
 	</li>
 	<li>
 		<strong>Performance of a Contract</strong>
@@ -184,16 +192,13 @@ pubDate: '2024-01-01'
 	compliance with applicable data protection laws, including the General Data Protection Regulation
 	(GDPR). To safeguard your data during these transfers, we rely on standard contractual clauses or
 	other appropriate safeguards, ensuring that your data is protected in accordance with GDPR
-	standards. <br />
-	<br />
+	standards.
+</p>
+<p>
 	<strong>Use of Trackers</strong>
-	<p>
-		We may use tracking technologies to enhance your experience, understand how you interact with
-		the app, and show personalized content or ads. You can manage your preferences in your device
-		settings.
-	</p>
 	<br />
-	To view our full cookie policy, click [here].
+	CurbToCar does not show advertising and does not track you across other companies' apps or
+	websites.
 </p>
 <h3>
 	<strong>Data Subject Rights</strong>
@@ -214,8 +219,8 @@ pubDate: '2024-01-01'
 		<br />
 		You have the right to correct any inaccurate or incomplete data we hold about you.
 		<p>
-			<em>Example</em>: You can update your contact details or vehicle information through your app
-			settings.
+			<em>Example</em>: You can update your vehicle information at any time on the app's search
+			screen.
 		</p>
 	</li>
 	<li>
@@ -223,8 +228,8 @@ pubDate: '2024-01-01'
 		<br />
 		You can request the deletion of your data under certain circumstances.
 		<p>
-			<em>Example</em>: If you delete your account, we will erase all associated data, unless we are
-			required to retain it for legal reasons.
+			<em>Example</em>: CurbToCar has no accounts. If you contact us to request deletion, we will
+			erase any data we can link to you, unless we are required to retain it for legal reasons.
 		</p>
 	</li>
 	<li>
@@ -275,8 +280,9 @@ pubDate: '2024-01-01'
 	<li>
 		<strong>Image Processing</strong>
 		<p>
-			Images captured by your camera are processed for vehicle identification but are not
-			permanently stored by us or our third-party providers.
+			Images captured by your camera are processed for vehicle identification and are not stored by
+			us. Our third-party providers handle the images they receive under their own policies, linked
+			below.
 		</p>
 		<em>Example</em>: After processing your images to identify vehicles, the images are not retained
 		in our systems.
@@ -297,10 +303,9 @@ pubDate: '2024-01-01'
 <p>
 	We retain your personal data for as long as necessary to fulfill the purposes for which it was
 	collected, unless a longer retention period is required by law.
-	<p>
-		<em>Example</em>: We may retain usage data for a reasonable period to improve our services and
-		comply with legal requirements.
-	</p>
+</p>
+<p>
+	<em>Example</em>: Request metrics are kept for about three months. Images are not stored by us.
 </p>
 <h3>
 	<strong>Changes to This Policy</strong>
@@ -332,14 +337,28 @@ pubDate: '2024-01-01'
 	<li>
 		<strong>OpenAI</strong>
 		<p>
-			We share API results from Eydea Recognition along with your vehicle description with OpenAI to
-			match detected vehicles with your specific vehicle.
+			We share cropped images of detected vehicles, API results from Eydea Recognition, and your
+			vehicle description with OpenAI to match detected vehicles with your specific vehicle.
 		</p>
-		<em>Important</em>: The data shared with OpenAI is limited to vehicle descriptions and detection
-		results, not the original images. This data is used solely for the purpose of matching detected
-		vehicles to your description. You can learn more about how OpenAI processes your data by
-		reviewing their{' '}
+		<em>Important</em>: The data shared with OpenAI is limited to cropped images of detected
+		vehicles (not full camera frames), detection results, and your vehicle description. This data is
+		used solely for the purpose of matching detected vehicles to your description. OpenAI may keep
+		API inputs for a limited period under its own policies. You can learn more about how OpenAI
+		processes your data by reviewing their{' '}
 		<a href='https://openai.com/policies/privacy-policy' target='_blank' rel='noopener noreferrer'>
+			Privacy Policy
+		</a>
+	</li>
+	<li>
+		<strong>Cloudflare</strong>
+		<p>
+			Requests from the app to Eydea Recognition and OpenAI pass through a relay we operate on
+			Cloudflare's network. The relay forwards each request and does not store images or request
+			content.
+		</p>
+		<em>Important</em>: As the host of the relay, Cloudflare processes the IP address of each
+		request. You can learn more about how Cloudflare processes your data by reviewing their{' '}
+		<a href='https://www.cloudflare.com/privacypolicy/' target='_blank' rel='noopener noreferrer'>
 			Privacy Policy
 		</a>
 	</li>
